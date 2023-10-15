@@ -1,7 +1,9 @@
 package com.example.foodapp.screen
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +32,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -40,6 +43,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -51,6 +55,7 @@ import com.example.foodapp.R
 import com.example.foodapp.data.Food
 import com.example.foodapp.data.FoodType
 import com.example.foodapp.data.foods
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -75,11 +80,13 @@ fun HomeScreen(navController: NavController) {
 
     Scaffold(topBar = {
         CenterAlignedTopAppBar(
-            title = { Text(text = "Our Menu",
+            title = {
+                Text(
+                    text = "Our Menu",
 
 
-            )
-             }
+                    )
+            }
         )
     }) { paddings ->
         Column(modifier = Modifier.padding(paddings)) {
@@ -101,9 +108,10 @@ fun HomeScreen(navController: NavController) {
 
 
                             .background(
-                                   color = if (selectedFoodType.value == foodType) Color(0xffe0e0e0) else Color.Transparent
+                                color = if (selectedFoodType.value == foodType) Color(0xffe0e0e0) else Color.Transparent
 
-                            ).clickable {
+                            )
+                            .clickable {
                                 selectedFoodType.value = foodType
                                 foodsState.clear()
                                 foodsState.addAll(foods.filter { it.type == selectedFoodType.value })
@@ -116,10 +124,11 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 14.sp,
                             fontFamily = ubuntuFont,
                             modifier = Modifier.padding(horizontal = 8.dp),
-                            color = if (selectedFoodType.value == foodType) Color(0xff313131) else Color(0xffa1a1a1),
+                            color = if (selectedFoodType.value == foodType) Color(0xff313131) else Color(
+                                0xffa1a1a1
+                            ),
                             fontStyle = if (selectedFoodType.value == foodType) FontStyle.Normal else FontStyle.Italic
                         )
-
 
 
                     }
@@ -137,8 +146,8 @@ fun HomeScreen(navController: NavController) {
 }
 
 
-
-@Preview (showBackground = true,
+@Preview(
+    showBackground = true,
     showSystemUi = true,
 
 
@@ -146,11 +155,10 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun HomeScreenPreview(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     HomeScreen(navController = NavController(LocalContext.current))
 }
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -158,12 +166,12 @@ fun HomeScreenPreview(
 fun Foods(
     items: List<Food>,
     onLikeChange: (Food) -> Unit,
-    onTap: (Food) -> Unit
+    onTap: (Food) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xfff1f1f1))
+
             .padding(horizontal = 8.dp)
     ) {
         Spacer(modifier = Modifier.height(8.dp))
@@ -180,29 +188,43 @@ fun Foods(
 }
 
 
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodItem(
     food: Food,
     onLikeChange: (Food) -> Unit,
-    onTap: (Food) -> Unit
+    onTap: (Food) -> Unit,
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .fillMaxWidth()
+
             .padding(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (food.liked) Color(0xffe6e6e6) else Color(0xfff1f1f1)
-        ),
+
         onClick = { onTap(food) }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(2.dp)
+
+                .background(
+                    color = if (isSystemInDarkTheme()) {
+                        colorResource(
+                            id = R.color.transparent_black
+                        )
+
+
+                    } else {
+                        colorResource(
+                            id = R.color.transparent_white
+                        )
+
+                    }
+
+
+                )
+
 
         ) {
             Image(
@@ -219,10 +241,21 @@ fun FoodItem(
                 modifier = Modifier
                     .padding(horizontal = 4.dp)
                     .fillMaxWidth(),
+
+                color = if (isSystemInDarkTheme()) {
+                    colorResource(
+                        id = R.color.white
+                    )
+
+
+                } else {
+                    colorResource(
+                        id = R.color.black
+                    )
+                },
+
                 fontSize = if (food.name.length > 20) 14.sp else 17.sp,
-                color = Color(0xff313131),
-                maxLines = 1
-                ,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -236,26 +269,42 @@ fun FoodItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
 
 
-
-
-            ) {
+                ) {
                 Text(
                     text = "${food.price}$",
                     modifier = Modifier,
                     fontSize = 18.sp,
+                    color = if (isSystemInDarkTheme()) {
+                        colorResource(
+                            id = R.color.white
+                        )
 
 
+                    } else {
+                        colorResource(
+                            id = R.color.black
+                        )
+                    }
 
 
-                    color = Color(0xff313131)
                 )
 
 
 
                 Text(
                     text = "${food.preparationTimeMinutes} min",
-                    fontSize = 18.sp,
-                    color = Color(0xff313131),
+                    fontSize = 18.sp, color = if (isSystemInDarkTheme()) {
+                        colorResource(
+                            id = R.color.white
+                        )
+
+
+                    } else {
+                        colorResource(
+                            id = R.color.black
+                        )
+                    }
+
 
                 )
             }
