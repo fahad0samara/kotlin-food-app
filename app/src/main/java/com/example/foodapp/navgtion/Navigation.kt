@@ -24,7 +24,7 @@ fun Navigation() {
     val userLoggedIn = sharedPreferences.getBoolean("loggedIn",false)
     NavHost(navController = navController, startDestination = if (userLoggedIn) "home" else "auth"){
 
-        composable("auth"){
+        composable("Splash"){
             SplashScreen(navController = navController)
         }
         composable("home"){

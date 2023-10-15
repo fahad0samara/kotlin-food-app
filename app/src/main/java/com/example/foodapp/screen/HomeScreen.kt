@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -38,6 +41,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -85,21 +90,23 @@ fun HomeScreen(navController: NavController) {
                     .height(30.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                itemsIndexed(items = FoodType.entries.toTypedArray()) { index, foodType ->
+                itemsIndexed(items = FoodType.entries.toTypedArray()) { _, foodType ->
                     Box(
                         modifier = Modifier
-                            .clip(CircleShape)
-                            .background(
-                                color = if (selectedFoodType.value == foodType) {
-                                    Color(0xffe0e0e0)
-                                } else {
-                                    Color.Transparent
-                                }
+                            .clip(
+                                CircleShape
+
                             )
-                            .clickable {
+                            .sizeIn(minWidth = 80.dp, minHeight = 30.dp)
+
+
+                            .background(
+                                   color = if (selectedFoodType.value == foodType) Color(0xffe0e0e0) else Color.Transparent
+
+                            ).clickable {
                                 selectedFoodType.value = foodType
                                 foodsState.clear()
-                                foodsState.addAll(foods.filter { it.type == foodType })
+                                foodsState.addAll(foods.filter { it.type == selectedFoodType.value })
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -108,8 +115,13 @@ fun HomeScreen(navController: NavController) {
                             text = foodType.name,
                             fontSize = 14.sp,
                             fontFamily = ubuntuFont,
-                            modifier = Modifier.padding(horizontal = 8.dp)
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            color = if (selectedFoodType.value == foodType) Color(0xff313131) else Color(0xffa1a1a1),
+                            fontStyle = if (selectedFoodType.value == foodType) FontStyle.Normal else FontStyle.Italic
                         )
+
+
+
                     }
                 }
             }
@@ -133,7 +145,9 @@ fun HomeScreen(navController: NavController) {
     )
 
 @Composable
-fun HomeScreenPreview() {
+fun HomeScreenPreview(
+    modifier: Modifier = Modifier
+) {
     HomeScreen(navController = NavController(LocalContext.current))
 }
 
@@ -177,70 +191,75 @@ fun FoodItem(
 ) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xfff1f1f1)
+            containerColor = if (food.liked) Color(0xffe6e6e6) else Color(0xfff1f1f1)
         ),
-
         onClick = { onTap(food) }
-
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(2.dp)
+
+        ) {
             Image(
                 painter = painterResource(id = food.image),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp),
+                    .heightIn(min = 150.dp, max = 150.dp),
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = food.name,
-                modifier = Modifier.padding(horizontal = 8.dp),
-                fontSize = 17.sp,
-
+                modifier = Modifier
+                    .padding(horizontal = 4.dp)
+                    .fillMaxWidth(),
+                fontSize = if (food.name.length > 20) 14.sp else 17.sp,
+                color = Color(0xff313131),
+                maxLines = 1
+                ,
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "${food.price}$",
-                modifier = Modifier.padding(horizontal = 8.dp),
-                fontSize = 17.sp,
 
-            )
-            Spacer(modifier = Modifier.height(8.dp))
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(10.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+
+
+
+
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(30.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xffe0e0e0))
-                        .clickable {
-                            onLikeChange(food)
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(
-                            id = if (food.liked) R.drawable.ic_eye_off else R.drawable.capp_uccino
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "${food.price}$",
+                    modifier = Modifier,
+                    fontSize = 18.sp,
+
+
+
+
+                    color = Color(0xff313131)
+                )
+
+
+
                 Text(
                     text = "${food.preparationTimeMinutes} min",
-                    fontSize = 14.sp,
-
+                    fontSize = 18.sp,
+                    color = Color(0xff313131),
 
                 )
             }
         }
     }
 }
+
