@@ -131,5 +131,29 @@ val foods = listOf(
         rating = 4.6f, // Example rating for this food
         reviews = 40 // Example number of reviews for this food
     ),
+    Food(
+        id = 11,
+        name = "Grilled Steak",
+        description = "Juicy grilled steak with a side of vegetables",
+        image = R.drawable.grilled_steak,
+        type = FoodType.MainCourse,
+        liked = false,
+        price = 18, // Example price in your desired format
+        preparationTimeMinutes = 25, // Example preparation time in minutes
+        rating = 4.7f, // Example rating for this food
+        reviews = 30 // Example number of reviews for this food
+    ),
+    Food(
+        id = 12,
+        name = "Vegetable Stir-Fry",
+        description = "Colorful stir-fried vegetables with your choice of sauce",
+        image = R.drawable.vegetable_stir_fry,
+        type = FoodType.MainCourse,
+        liked = false,
+        price = 14, // Example price in your desired format
+        preparationTimeMinutes = 20, // Example preparation time in minutes
+        rating = 4.5f, // Example rating for this food
+        reviews = 20 // Example number of reviews for this food
+    ),
 
     )
