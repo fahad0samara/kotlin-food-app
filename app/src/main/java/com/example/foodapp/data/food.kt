@@ -155,5 +155,77 @@ val foods = listOf(
         rating = 4.5f, // Example rating for this food
         reviews = 20 // Example number of reviews for this food
     ),
+    Food(
+        id = 13,
+        name = "Garlic Bread",
+        description = "Toasty garlic bread with a crispy crust",
+        image = R.drawable.garlic_bread,
+        type = FoodType.SideDish,
+        liked = false,
+        price = 5, // Example price in your desired format
+        preparationTimeMinutes = 10, // Example preparation time in minutes
+        rating = 4.3f, // Example rating for this food
+        reviews = 12 // Example number of reviews for this food
+    ),
+    Food(
+        id = 14,
+        name = "Onion Rings",
+        description = "Crispy onion rings with a savory dipping sauce",
+        image = R.drawable.onion_rings,
+        type = FoodType.SideDish,
+        liked = false,
+        price = 8, // Example price in your desired format
+        preparationTimeMinutes = 12, // Example preparation time in minutes
+        rating = 4.6f, // Example rating for this food
+        reviews = 14 // Example number of reviews for this food
+    ),
+    Food(
+        id = 15,
+        name = "Chocolate Brownie",
+        description = "Decadent chocolate brownie with walnuts",
+        image = R.drawable.chocolate_brownie,
+        type = FoodType.Snack,
+        liked = false,
+        price = 5, // Example price in your desired format
+        preparationTimeMinutes = 25, // Example preparation time in minutes
+        rating = 4.6f, // Example rating for this food
+        reviews = 30 // Example number of reviews for this food
+    ),
+    Food(
+        id = 16,
+        name = "Popcorn",
+        description = "Freshly popped buttered popcorn",
+        image = R.drawable.popcorn,
+        type = FoodType.Snack,
+        liked = false,
+        price = 4, // Example price in your desired format
+        preparationTimeMinutes = 10, // Example preparation time in minutes
+        rating = 4.3f, // Example rating for this food
+        reviews = 17 // Example number of reviews for this food
+    ),
+    Food(
+        id = 17,
+        name = "Iced Coffee",
+        description = "Chilled coffee with ice cubes and a dash of cream",
+        image = R.drawable.iced_coffee,
+        type = FoodType.Beverage,
+        liked = false,
+        price = 4, // Example price in your desired format
+        preparationTimeMinutes = 10, // Example preparation time in minutes
+        rating = 4.3f, // Example rating for this food
+        reviews = 12 // Example number of reviews for this food
+    ),
+    Food(
+        id = 18,
+        name = "Lemonade",
+        description = "Homemade lemonade with fresh lemons and sugar",
+        image = R.drawable.lemonade,
+        type = FoodType.Beverage,
+        liked = false,
+        price = 3, // Example price in your desired format
+        preparationTimeMinutes = 5, // Example preparation time in minutes
+        rating = 4.5f, // Example rating for this food
+        reviews = 18 // Example number of reviews for this food
+    ),
 
     )

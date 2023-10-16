@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +18,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -34,20 +37,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.foodapp.data.Food
 import com.example.foodapp.data.foods
+import com.example.foodapp.model.ShoppingCartItem
+import com.example.foodapp.model.ShoppingCartViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FoodScreen(navController: NavController, selectedFood: Food) {
+fun FoodScreen(navController: NavController, selectedFood: Food,
+
+               ) {
+    val cartViewModel: ShoppingCartViewModel = viewModel()
+
+
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {
-                    Text(text = selectedFood.name)
-                },
+                { ShoppingCartSummary(cartItems = cartViewModel.cartItems) },
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
@@ -77,7 +87,26 @@ fun FoodScreen(navController: NavController, selectedFood: Food) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                Text(text = selectedFood.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Row {
+                    Button(
+
+                            onClick = {
+                                // Add the selected food to the cart
+                                cartViewModel.addItemToCart(selectedFood)
+                            },
+
+
+                        colors = ButtonDefaults.buttonColors(
+
+                            contentColor = Color.White,
+                            containerColor = Color(0xff313131)
+                        )
+                    ) {
+                        Text(text = "Add to Cart")
+                    }
+                    Text(text = selectedFood.name, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(text = "${selectedFood.price}$", fontSize = 17.sp)
                 Spacer(modifier = Modifier.height(16.dp))
@@ -173,6 +202,32 @@ fun RecommendedFood(food: Food, onTap:(Food)->Unit) {
                 Text(text = "${food.price}$")
                 Spacer(modifier = Modifier.height(4.dp))
 
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ShoppingCartSummary(cartItems: List<ShoppingCartItem>) {
+    Column {
+        Text(
+            text = "ملخص السلة",
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp,
+            modifier = Modifier.padding(16.dp)
+        )
+        if (cartItems.isEmpty()) {
+            Text(
+                text = "السلة فارغة",
+                modifier = Modifier.padding(16.dp)
+            )
+        } else {
+            for (item in cartItems) {
+                Text(
+                    text = "${item.food.name}: ${item.quantity} x ${item.food.price}$",
+                    modifier = Modifier.padding(8.dp)
+                )
             }
         }
     }

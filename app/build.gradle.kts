@@ -64,7 +64,6 @@ dependencies {
 
 
 
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -74,9 +73,10 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
 
     implementation(libs.lottie.compose)
-
+    implementation(libs.androidx.lifecycle.viewmodel)
 
     implementation(libs.androidx.navigation.compose)
+
 
 
 

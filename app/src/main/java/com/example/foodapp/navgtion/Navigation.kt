@@ -3,6 +3,7 @@ package com.example.foodapp.navgtion
 
 
 import android.content.Context
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
@@ -19,10 +20,9 @@ import com.example.foodapp.screen.SplashScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
-    val context = LocalContext.current
-    val sharedPreferences = context.getSharedPreferences("main", Context.MODE_PRIVATE)
-    val userLoggedIn = sharedPreferences.getBoolean("loggedIn",false)
-    NavHost(navController = navController, startDestination = if (userLoggedIn) "home" else "auth"){
+
+
+  NavHost(navController = navController, startDestination = "Splash") {
 
         composable("Splash"){
             SplashScreen(navController = navController)
@@ -35,4 +35,20 @@ fun Navigation() {
             FoodScreen(navController = navController, selectedFood = selectedFood)
         }
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
