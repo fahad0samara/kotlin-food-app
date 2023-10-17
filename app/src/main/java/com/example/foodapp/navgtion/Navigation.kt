@@ -14,6 +14,7 @@ import androidx.navigation.navArgument
 import com.example.foodapp.data.foods
 import com.example.foodapp.screen.FoodScreen
 import com.example.foodapp.screen.HomeScreen
+import com.example.foodapp.screen.SearchScreen
 import com.example.foodapp.screen.SplashScreen
 
 
@@ -22,7 +23,7 @@ fun Navigation() {
     val navController = rememberNavController()
 
 
-  NavHost(navController = navController, startDestination = "Splash") {
+  NavHost(navController = navController, startDestination = "home") {
 
         composable("Splash"){
             SplashScreen(navController = navController)
@@ -30,6 +31,9 @@ fun Navigation() {
         composable("home"){
             HomeScreen(navController = navController)
         }
+      composable("Search"){
+          SearchScreen(navController = navController)
+      }
         composable("food/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })) {
             val selectedFood = foods.find { it.id == navController.currentBackStackEntry?.arguments?.getInt("id") } ?: foods[0]
             FoodScreen(navController = navController, selectedFood = selectedFood)
