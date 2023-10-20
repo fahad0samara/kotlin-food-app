@@ -1,5 +1,6 @@
 package com.example.foodapp.screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -62,18 +63,17 @@ import com.example.foodapp.data.FoodType
 import com.example.foodapp.data.foods
 import com.example.foodapp.model.ShoppingCartItem
 import com.example.foodapp.model.ShoppingCartViewModel
+import com.example.foodapp.navgtion.DetailsScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController) {
-
-
-
-
-
     val onFoodItemClick: (Food) -> Unit = { selectedFood ->
-        navController.navigate("food/${selectedFood.id}")
+        navController.navigate(
+            DetailsScreen.Food.route + "/${selectedFood.id}"
+        )
     }
+
 
     val selectedFoodType = remember {
         mutableStateOf(FoodType.MainCourse) // Added default selection
@@ -144,7 +144,7 @@ fun HomeScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             FoodList(
                 items = foodsState,
-                onLikeChange = onLikeChange,
+
                 onTap = onFoodItemClick
 
 

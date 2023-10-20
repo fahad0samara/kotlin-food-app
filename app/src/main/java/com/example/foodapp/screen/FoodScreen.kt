@@ -47,7 +47,9 @@ import com.example.foodapp.model.ShoppingCartViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FoodScreen(navController: NavController, selectedFood: Food,
+fun FoodScreen(navController: NavController, selectedFood: Food
+
+
 
                ) {
     val cartViewModel: ShoppingCartViewModel = viewModel()
@@ -57,7 +59,9 @@ fun FoodScreen(navController: NavController, selectedFood: Food,
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                { ShoppingCartSummary(cartItems = cartViewModel.cartItems) },
+                title = {
+                    Text(text = selectedFood.name)
+                },
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
@@ -208,27 +212,4 @@ fun RecommendedFood(food: Food, onTap:(Food)->Unit) {
 }
 
 
-@Composable
-fun ShoppingCartSummary(cartItems: List<ShoppingCartItem>) {
-    Column {
-        Text(
-            text = "ملخص السلة",
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            modifier = Modifier.padding(16.dp)
-        )
-        if (cartItems.isEmpty()) {
-            Text(
-                text = "السلة فارغة",
-                modifier = Modifier.padding(16.dp)
-            )
-        } else {
-            for (item in cartItems) {
-                Text(
-                    text = "${item.food.name}: ${item.quantity} x ${item.food.price}$",
-                    modifier = Modifier.padding(8.dp)
-                )
-            }
-        }
-    }
-}
+

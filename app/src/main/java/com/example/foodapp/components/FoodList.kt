@@ -47,7 +47,8 @@ import com.example.foodapp.data.FoodType
 @Composable
 fun FoodList(
     items: List<Food>,
-    onLikeChange: (Food) -> Unit,
+
+
     onTap: (Food) -> Unit
 
 ) {
@@ -64,7 +65,8 @@ fun FoodList(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             itemsIndexed(items = items) { index, food ->
-                FoodItem(food = food, onLikeChange = onLikeChange, onTap = onTap,
+                FoodItem(food = food,  onTap = onTap,
+
 
                     )
             }
@@ -77,7 +79,7 @@ fun FoodList(
 @Composable
 fun FoodItem(
     food: Food,
-    onLikeChange: (Food) -> Unit,
+
     onTap: (Food) -> Unit,
 
 
