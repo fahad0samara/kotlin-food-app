@@ -1,5 +1,7 @@
 package com.example.foodapp.navgtion
 
+
+
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -23,30 +25,29 @@ fun NavGraphBuilder.FoodScreenGraph(navController: NavHostController) {
         ) { backStackEntry ->
             // Add a Log statement to check the selectedFoodId
             val selectedFoodId = backStackEntry.arguments?.getInt("id")
-            android.util.Log.d("MyApp", "Selected Food ID: $selectedFoodId")
+
 
             // Use selectedFoodId to find the selected food item
             val selectedFood = selectedFoodId?.let { foodId ->
                 foods.find { it.id == foodId }
             }
 
-            // Add a Log statement to check the selectedFood
-            android.util.Log.d("MyApp", "Selected Food: $selectedFood")
+
 
             // Check if selectedFood is not null and navigate to FoodScreen
             selectedFood?.let {
                 FoodScreen(navController = navController, selectedFood = it)
-            }
+            }}
         }
     }
-}
+
 
 
 
 
 sealed class DetailsScreen(val route: String) {
     data object Food : DetailsScreen(route = "food")
-    data object Overview : DetailsScreen(route = "OVERVIEW")
+
 }
 
 

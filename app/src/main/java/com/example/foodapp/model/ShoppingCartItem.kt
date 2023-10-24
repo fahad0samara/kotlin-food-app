@@ -1,8 +1,12 @@
 package com.example.foodapp.model
 
-import com.example.foodapp.data.Food
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity (tableName = "cart_items")
 data class ShoppingCartItem(
-    val food: Food,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+
+    val food: Int,
     var quantity: Int
 )

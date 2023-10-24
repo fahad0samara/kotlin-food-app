@@ -38,30 +38,33 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+
 import androidx.navigation.NavController
 import com.example.foodapp.data.Food
 import com.example.foodapp.data.foods
-import com.example.foodapp.model.ShoppingCartItem
 import com.example.foodapp.model.ShoppingCartViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FoodScreen(navController: NavController, selectedFood: Food
-
-
+fun FoodScreen(navController: NavController, selectedFood: Food,
 
                ) {
-    val cartViewModel: ShoppingCartViewModel = viewModel()
+
+
+
+
+
+
+
+
 
 
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {
-                    Text(text = selectedFood.name)
-                },
+                title = { Text(text = "Food") },
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Rounded.ArrowBack,
@@ -95,8 +98,21 @@ fun FoodScreen(navController: NavController, selectedFood: Food
                     Button(
 
                             onClick = {
-                                // Add the selected food to the cart
-                                cartViewModel.addItemToCart(selectedFood)
+                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             },
 
 
@@ -210,6 +226,5 @@ fun RecommendedFood(food: Food, onTap:(Food)->Unit) {
         }
     }
 }
-
 
 

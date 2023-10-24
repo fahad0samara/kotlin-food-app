@@ -3,6 +3,11 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
 
+
+
+
+
+
 }
 
 android {
@@ -64,6 +69,11 @@ dependencies {
 
 
 
+
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -80,5 +90,9 @@ dependencies {
 
 
 
+
+}
+
+fun kapt(s: String) {
 
 }
