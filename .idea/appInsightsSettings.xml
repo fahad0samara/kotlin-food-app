@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.fahad.tastybite" />
+                  <option name="mobileSdkAppId" value="1:224828056735:android:9d6876aae1e7ff85ec2eaa" />
+                  <option name="projectId" value="tastybite-food" />
+                  <option name="projectNumber" value="224828056735" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

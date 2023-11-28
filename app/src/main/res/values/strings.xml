@@ -1,4 +1,8 @@
 <resources>
-    <string name="app_name">food app</string>
-    <string name="our_menu">Our Menu</string>
+    <string name="app_name">TastyBite</string>
+    <string name="search_food">
+        Search for food
+    </string>
+    <string name="no_results_found">No results found for your search
+        try to search again</string>
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "224828056735",
+    "project_id": "tastybite-food",
+    "storage_bucket": "tastybite-food.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224828056735:android:9d6876aae1e7ff85ec2eaa",
+        "android_client_info": {
+          "package_name": "com.fahad.tastybite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ29CjeuXIYfHF5VbQkOVjp6oRI1NMvbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

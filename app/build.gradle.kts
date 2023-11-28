@@ -1,62 +1,58 @@
 
-plugins {
+  plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
 
+    alias(libs.plugins.googleServices)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.kotlinKsp)
+  }
 
-
-
-
-
-}
 
 android {
-    namespace = "com.example.foodapp"
-    compileSdk = 34
+  namespace = "com.fahad.tastybite"
+  compileSdk = 34
 
-    defaultConfig {
-        applicationId = "com.example.foodapp"
-        minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+  defaultConfig {
+    applicationId = "com.fahad.tastybite"
+    minSdk = 29
+    targetSdk = 34
+    versionCode = 1
+    versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables {
+      useSupportLibrary = true
     }
+  }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
+  buildTypes {
+    release {
+      isMinifyEnabled = false
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+  buildFeatures {
+    compose = true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.5.4"
+  }
+  packaging {
+    resources {
+      excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+  }
 }
 
-dependencies {
+  dependencies {
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
@@ -67,13 +63,6 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
 
-
-
-
-
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -82,17 +71,58 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
 
-    implementation(libs.lottie.compose)
-    implementation(libs.androidx.lifecycle.viewmodel)
-
-    implementation(libs.androidx.navigation.compose)
 
 
 
 
 
-}
+    //Room
+    val room_version = "2.6.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.room:room-ktx:2.6.0")
+    ksp("androidx.room:room-compiler:$room_version")
 
-fun kapt(s: String) {
+    //Dagger Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hiltAndroidCompiler)
+    //Room
+    implementation(libs.androidx.room.runtime.v260)
+    ksp(libs.androidx.room.compiler.v260)
+    implementation (libs.androidx.room.ktx.v260)
 
-}
+    //lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.compose.v262)
+    //navigation
+    implementation(libs.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose.v100)
+
+
+
+
+
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    //noinspection UseTomlInstead
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation(libs.firebase.storage.ktx)
+
+
+
+
+    //phothoView
+    implementation (libs.coil.compose)
+
+    //WindowSizeClass
+    implementation ("androidx.compose.material3:material3-window-size-class:1.1.2")
+
+
+  }
+  ksp {
+    // All KSP Gradle plugin options
+    arg("com.google.devtools.ksp.incremental.apt", "true")
+
+
+  }
