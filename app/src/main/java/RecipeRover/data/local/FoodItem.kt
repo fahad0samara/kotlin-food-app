@@ -31,7 +31,7 @@ data class Recipe(
   val preparationTime: Int, // in minutes
   val cookingTime: Int, // in minutes
   val difficultyLevel: String // Easy, Medium, Hard,
-    , val foodType: FoodType = FoodType.MainCourse
+    , val foodType: FoodType = FoodType.Other
 
 )
 

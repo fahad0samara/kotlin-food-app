@@ -83,9 +83,10 @@ fun Home(
   userDataViewModel: UserDataViewModel
 ) {
   val selectedCategory = remember { mutableStateOf(FoodType.Appetizer) }
-    val itemsForCategory = remember(selectedCategory.value) { availableRecipes.filter { it.title ==
-    selectedCategory.value.name
-    } }
+  val itemsForCategory = remember(selectedCategory.value) {
+    availableRecipes.filter { it.foodType == selectedCategory.value }
+  }
+
 
   val user by userDataViewModel.user.collectAsState() // Observe the user state
   val painter = rememberAsyncImagePainter(
@@ -339,7 +340,7 @@ fun FoodItem(
               color = Color.White,
             )
             Text(
-                  text = "${food.steps} calories", // Assuming there's a 'calories' property in FoodItem
+                  text = "${food.cookingTime} calories", // Assuming there's a 'calories' property in FoodItem
               fontSize = 14.sp,
               color = Color.White,
             )
