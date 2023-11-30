@@ -162,7 +162,14 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Prepare pancake batter according to the mix."),
       RecipeStep(2, "Fold in diced apples and a pinch of cinnamon."),
-      RecipeStep(3, "Cook pancakes on a griddle and serve with maple syrup.")
+      RecipeStep(
+        3, "Cook pancakes on a griddle and serve with maple syrup."
+      ),
+        RecipeStep(4, "Prepare pancake batter according to the mix."),
+
+      RecipeStep(5, "Cook pancakes on a griddle and serve with maple syrup."),
+
+
     ),
     4,
     15,

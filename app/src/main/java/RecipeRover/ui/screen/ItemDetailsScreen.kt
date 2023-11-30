@@ -46,6 +46,8 @@ import androidx.navigation.NavController
 
 import RecipeRover.data.local.entities.FavoriteItem
 import RecipeRover.ui.screen.cart.CartViewModel
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 
@@ -54,237 +56,212 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 @Composable
 fun ItemDetailsScreen(
   item: Recipe,
-  viewModel: CartViewModel,
-  favoriteViewModel: FavoriteViewModel, // Inject the FavoriteViewModel
+  favoriteViewModel: FavoriteViewModel,
   navController: NavController
 ) {
-    val isBookInFavorites by favoriteViewModel.isBookInFavorites(item.title).collectAsState(false)
+  val isBookInFavorites by favoriteViewModel.isBookInFavorites(item.title).collectAsState(false)
 
-
-
+  Box(
+    modifier = Modifier
+      .fillMaxSize()
+      .background(MaterialTheme.colorScheme.background)
+  ) {
+    var scrollState = rememberLazyListState()
 
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+      state = scrollState,
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp)
     ) {
-        item {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .height(
-                        250.dp
-                    )
-            ) {
-                // Blurred or translucent background image
-                Image(
-                    painter = painterResource(id = item.imageResId),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .background(
-                            Brush.horizontalGradient(
-                                colors = listOf(
-                                    Color.Transparent, Color.Black
-                                ), startX = 0.0f, endX = 200.0f
-                            )
-                        )
-                        .fillMaxSize()
-                        .graphicsLayer(alpha = 0.5f),
-                    contentScale = ContentScale.FillWidth
-                )
+      item {
+        // Header with circular image and back button
+        Box(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(250.dp)
+            .clip(RoundedCornerShape(16.dp))
+        ) {
+          // Circular image
+          Image(
+            painter = painterResource(id = item.imageResId),
+            contentDescription = null,
+            modifier = Modifier
+              .fillMaxSize()
+              .graphicsLayer(
+                alpha = 0.5f,
+                rotationZ = 30f,
+                translationX = 100f,
+                translationY = -100f
+              )
+              .clip(CircleShape)
+              .background(MaterialTheme.colorScheme.surface)
+              .align(Alignment.Center),
+            contentScale = ContentScale.Crop
+          )
 
-                // Your main content (e.g., the centered image)
-                Image(
-                    painter = painterResource(id = item.imageResId),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(5.dp)
-                        .size(280.dp)
-                        .align(Alignment.Center),
-                    contentScale = ContentScale.FillHeight
-                )
-
-                // Back button
-                IconButton(
-                    onClick = { navController.popBackStack() },
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                        .padding(16.dp)
-                        .background(Color.White, RoundedCornerShape(16.dp))
-                ) {
-                    Icon(
-                        Icons.Default.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = Modifier.size(32.dp),
-                        tint = Color.Black
-                    )
-                }
-
-
-            }
-        }
-
-        item {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
-                    .clip(RoundedCornerShape(16.dp))
+          // Back button
+          IconButton(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier
+              .align(Alignment.TopStart)
+              .padding(16.dp)
+              .background(MaterialTheme.colorScheme.surface, CircleShape)
+          ) {
+            Icon(
+              Icons.Default.ArrowBack,
+              contentDescription = "Back",
+              modifier = Modifier.size(32.dp),
+              tint = Color.Black
             )
-
-            {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-
-                ) {
-                    Button(
-                        onClick = { viewModel.addToCart(item) },
-                        modifier = Modifier
-                            .height(40.dp)
-                            .size(40.dp)
-                            .weight(1f),
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Icon(
-                                Icons.Default.ShoppingCart,
-                                contentDescription = "Add to Cart",
-                                modifier = Modifier.size(40.dp)
-                            )
-                            Text(
-                                "Add to Cart", modifier = Modifier.padding(start = 4.dp)
-                            )
-                        }
-
-
-                    }
-                    IconButton(
-                        onClick = {
-                            //add to favorite
-                                  if (isBookInFavorites) {
-                                        favoriteViewModel.deleteFromFavorites(
-                                          FavoriteItem(
-                                            title = item.title,
-                                            description = item.description,
-                                            imageResId = item.imageResId,
-                                            servings = item.servings,
-
-                                        )
-                                        )
-
-                                  } else {
-                                      favoriteViewModel.addToFavorite(item)
-                                  }
-                        }, modifier = Modifier
-
-                            .padding(16.dp)
-                            .background(Color.White, RoundedCornerShape(16.dp))
-                    ) {
-                        Icon(
-                            Icons.Default.Favorite,
-                            contentDescription = "Favorite",
-                            modifier = Modifier.size(32.dp),
-                            tint = if (isBookInFavorites) Color.Red else Color.Black
-                        )
-                    }
-                }
-
-
-
-
-
-
-
-
-                Text(
-                    text = item.title,
-                    fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    fontStyle = FontStyle.Italic,
-
-
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                        .padding(horizontal = 5.dp),
-
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-
-                    ) {
-                    Text(
-                        text = "Author: ${item.chef}",
-                        fontSize = 16.sp,
-                        fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
-                        fontWeight = FontWeight.Bold
-
-
-                    )
-                    Text(
-                        text = "Year: ${item.steps}",
-                        fontSize = 16.sp,
-                        fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                        .background(
-                            MaterialTheme.colorScheme.primary, RoundedCornerShape(25.dp)
-                        )
-                        .padding(10.dp),
-
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-
-                    ) {
-                    Text(
-                        text = "Price: $${item.cookingTime}",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
-
-                        color = if (isSystemInDarkTheme()) Color.Black else Color.White
-                    )
-
-                    Text(
-                        text = "Pages: ${item.servings}",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.SemiBold,
-
-                        color = if (isSystemInDarkTheme()) Color.Black else Color.White
-                    )
-
-
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Description:", fontSize = 20.sp, fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = item.description, fontSize = 16.sp, textAlign = TextAlign.Justify
-                )
-
-            }
+          }
         }
+      }
+
+      item {
+        // Recipe details
+        Column(
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface)
+        ) {
+          // Recipe title
+          Text(
+            text = item.title,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface, // Text color
+            modifier = Modifier
+              .padding(top = 8.dp)
+              .fillMaxWidth()
+              .align(Alignment.CenterHorizontally)
+          )
+
+          // Recipe chef and details
+          Row(
+            modifier = Modifier
+              .fillMaxWidth()
+              .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(
+              text = "Chef: ${item.chef}",
+              fontSize = 16.sp,
+              fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+              fontWeight = FontWeight.Bold,
+              color = MaterialTheme.colorScheme.onSurface // Text color
+            )
+            Text(
+              text = "Servings: ${item.servings}",
+              fontSize = 16.sp,
+              fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+              fontWeight = FontWeight.Bold,
+              color = MaterialTheme.colorScheme.onSurface // Text color
+            )
+          }
+
+          // Recipe difficulty and time
+          Row(
+            modifier = Modifier
+              .fillMaxWidth()
+              .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(
+              text = "Difficulty: ${item.difficultyLevel}",
+              fontSize = 16.sp,
+              fontWeight = FontWeight.Bold,
+              color = MaterialTheme.colorScheme.onSurface // Text color
+            )
+            Text(
+              text = "Time: ${item.cookingTime} min",
+              fontSize = 16.sp,
+              fontWeight = FontWeight.Bold,
+              color = MaterialTheme.colorScheme.onSurface // Text color
+            )
+          }
+
+          // Recipe Ingredients
+          Text(
+            text = "Ingredients:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface, // Text color
+            modifier = Modifier.padding(top = 16.dp)
+          )
+          item.ingredients.forEach { ingredient ->
+            Text(
+              text = "- ${ingredient.name}",
+              fontSize = 16.sp,
+              color = MaterialTheme.colorScheme.onSurface, // Text color
+              modifier = Modifier.padding(start = 32.dp, bottom = 8.dp)
+            )
+          }
+
+          // Recipe Steps
+          Text(
+            text = "Steps:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface, // Text color
+            modifier = Modifier.padding(top = 16.dp)
+          )
+          item.steps.forEach { step ->
+            Text(
+              text = "${step.order}. ${step.description}",
+              fontSize = 16.sp,
+              color = MaterialTheme.colorScheme.onSurface, // Text color
+              modifier = Modifier.padding(start = 32.dp, bottom = 8.dp)
+            )
+          }
+        }
+      }
     }
+
+    // Favorite button fixed at the bottom
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)
+        .align(Alignment.BottomCenter)
+    ) {
+      IconButton(
+        onClick = {
+          if (isBookInFavorites) {
+            favoriteViewModel.deleteFromFavorites(
+              FavoriteItem(
+                title = item.title,
+                description = item.description,
+                imageResId = item.imageResId,
+                servings = item.servings
+              )
+            )
+          } else {
+            favoriteViewModel.addToFavorite(item)
+          }
+        },
+        modifier = Modifier
+          .size(50.dp)
+          .background(MaterialTheme.colorScheme.primary, CircleShape)
+      ) {
+        Icon(
+          Icons.Default.Favorite,
+          contentDescription = "Favorite",
+          modifier = Modifier.size(32.dp),
+          tint = if (isBookInFavorites) Color.Red else Color.White
+        )
+      }
+    }
+  }
 }
+
+
+
+
 
 

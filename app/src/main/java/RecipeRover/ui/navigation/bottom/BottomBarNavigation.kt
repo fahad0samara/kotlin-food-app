@@ -76,7 +76,7 @@ fun BottomBarNavigation(navController: NavHostController,
       val selectedItem = viewModel.groupedItems.values.flatten()
           .firstOrNull { it.title == itemName }
       selectedItem?.let { item ->
-        ItemDetailsScreen(item, viewModel, favoriteViewModel, navController)
+        ItemDetailsScreen(item,  favoriteViewModel, navController)
       } ?: run {
         Text(text = "Item not found")
       }
