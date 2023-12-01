@@ -3,6 +3,7 @@ package com.fahad.RecipeRover.ui.screen
 import RecipeRover.data.local.FoodType
 import RecipeRover.data.local.Recipe
 import RecipeRover.data.local.availableRecipes
+import RecipeRover.ui.RecipeViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 
@@ -69,6 +70,7 @@ import com.fahad.RecipeRover.ui.navigation.bottom.SearchNavGraph
 import RecipeRover.ui.screen.cart.CartViewModel
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.derivedStateOf
 import com.fahad.RecipeRover.ui.theme.dimens
 
 import java.time.LocalTime
@@ -78,14 +80,31 @@ import java.time.LocalTime
 
 @Composable
 fun Home(
-  viewModel: CartViewModel,
+  recipeViewModel: RecipeViewModel,
   navController: NavController,
   userDataViewModel: UserDataViewModel
 ) {
   val selectedCategory = remember { mutableStateOf(FoodType.Appetizer) }
-  val itemsForCategory = remember(selectedCategory.value) {
-    availableRecipes.filter { it.foodType == selectedCategory.value }
+
+
+
+  // Filter recipes based on the selected category
+  val itemsForCategory by remember(selectedCategory.value) {
+    derivedStateOf {
+      val category = selectedCategory.value.name
+      recipeViewModel.recipes.value.filter { it.foodType.name == category }
+    }
   }
+
+
+
+
+
+
+
+
+
+
 
 
   val user by userDataViewModel.user.collectAsState() // Observe the user state
@@ -213,7 +232,12 @@ fun Home(
 
     CategorySelection(selectedCategory)
 
-    FoodList(itemsForCategory, navController)
+    FoodList(
+        recipeViewModel,
+        navController,
+        itemsForCategory
+        )
+
   }
 }
 
@@ -250,25 +274,34 @@ fun CategorySelection(selectedCategory: MutableState<FoodType>) {
 }
 @Composable
 fun FoodList(
-  items: List<Recipe>,
-  navController: NavController
+  recipeViewModel: RecipeViewModel,
+  navController: NavController,
+  itemsForCategory: List<Recipe>
 ) {
+
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(2.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
-
-
     ) {
-        items(items) { item ->
-            FoodItem(item, onTap = {
-                navController.navigate("itemDetails/${item.title}")
-            })
+        items(itemsForCategory) { item ->
+        FoodItem(item, onTap = {
+            navController.navigate("itemDetails/${item.title}")
+        })
         }
     }
+
 }
+
+
+
+
+
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

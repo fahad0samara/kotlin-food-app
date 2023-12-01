@@ -3,7 +3,6 @@ package RecipeRover.ui.screen
 import RecipeRover.data.local.Recipe
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,8 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -32,12 +29,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,9 +39,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 import RecipeRover.data.local.entities.FavoriteItem
+import RecipeRover.ui.RecipeViewModel
 import RecipeRover.ui.screen.cart.CartViewModel
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
+import androidx.compose.ui.text.style.TextOverflow
 
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 
@@ -57,8 +60,15 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 fun ItemDetailsScreen(
   item: Recipe,
   favoriteViewModel: FavoriteViewModel,
-  navController: NavController
+  navController: NavController,
+  recipeViewModel: RecipeViewModel
 ) {
+
+
+
+  val relatedItems = recipeViewModel.getRelatedRecipes(item.foodType)
+
+
   val isBookInFavorites by favoriteViewModel.isBookInFavorites(item.title).collectAsState(false)
 
   Box(
@@ -66,7 +76,7 @@ fun ItemDetailsScreen(
       .fillMaxSize()
       .background(MaterialTheme.colorScheme.background)
   ) {
-    var scrollState = rememberLazyListState()
+    val scrollState = rememberLazyListState()
 
     LazyColumn(
       state = scrollState,
@@ -81,6 +91,7 @@ fun ItemDetailsScreen(
             .fillMaxWidth()
             .height(250.dp)
             .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface)
         ) {
           // Circular image
           Image(
@@ -88,15 +99,10 @@ fun ItemDetailsScreen(
             contentDescription = null,
             modifier = Modifier
               .fillMaxSize()
-              .graphicsLayer(
-                alpha = 0.5f,
-                rotationZ = 30f,
-                translationX = 100f,
-                translationY = -100f
-              )
-              .clip(CircleShape)
+              .clip(RoundedCornerShape(16.dp))
               .background(MaterialTheme.colorScheme.surface)
-              .align(Alignment.Center),
+              .aspectRatio(1f)
+              .padding(16.dp),
             contentScale = ContentScale.Crop
           )
 
@@ -119,6 +125,36 @@ fun ItemDetailsScreen(
       }
 
       item {
+        // Favorite button fixed on the left
+        IconButton(
+          onClick = {
+            if (isBookInFavorites) {
+              favoriteViewModel.deleteFromFavorites(
+                FavoriteItem(
+                  title = item.title,
+                  description = item.description,
+                  imageResId = item.imageResId,
+                  servings = item.servings
+                )
+              )
+            } else {
+              favoriteViewModel.addToFavorite(item)
+            }
+          },
+          modifier = Modifier
+            .align(Alignment.TopStart)
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.primary, CircleShape)
+            .size(50.dp)
+        ) {
+          Icon(
+            Icons.Default.Favorite,
+            contentDescription = "Favorite",
+            modifier = Modifier.size(32.dp),
+            tint = if (isBookInFavorites) Color.Red else Color.White
+          )
+        }
+
         // Recipe details
         Column(
           modifier = Modifier
@@ -133,7 +169,7 @@ fun ItemDetailsScreen(
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface, // Text color
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
               .padding(top = 8.dp)
               .fillMaxWidth()
@@ -153,14 +189,14 @@ fun ItemDetailsScreen(
               fontSize = 16.sp,
               fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
               fontWeight = FontWeight.Bold,
-              color = MaterialTheme.colorScheme.onSurface // Text color
+              color = MaterialTheme.colorScheme.onSurface
             )
             Text(
               text = "Servings: ${item.servings}",
               fontSize = 16.sp,
               fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
               fontWeight = FontWeight.Bold,
-              color = MaterialTheme.colorScheme.onSurface // Text color
+              color = MaterialTheme.colorScheme.onSurface
             )
           }
 
@@ -176,13 +212,13 @@ fun ItemDetailsScreen(
               text = "Difficulty: ${item.difficultyLevel}",
               fontSize = 16.sp,
               fontWeight = FontWeight.Bold,
-              color = MaterialTheme.colorScheme.onSurface // Text color
+              color = MaterialTheme.colorScheme.onSurface
             )
             Text(
               text = "Time: ${item.cookingTime} min",
               fontSize = 16.sp,
               fontWeight = FontWeight.Bold,
-              color = MaterialTheme.colorScheme.onSurface // Text color
+              color = MaterialTheme.colorScheme.onSurface
             )
           }
 
@@ -191,14 +227,14 @@ fun ItemDetailsScreen(
             text = "Ingredients:",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface, // Text color
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(top = 16.dp)
           )
           item.ingredients.forEach { ingredient ->
             Text(
               text = "- ${ingredient.name}",
               fontSize = 16.sp,
-              color = MaterialTheme.colorScheme.onSurface, // Text color
+              color = MaterialTheme.colorScheme.onSurface,
               modifier = Modifier.padding(start = 32.dp, bottom = 8.dp)
             )
           }
@@ -208,57 +244,87 @@ fun ItemDetailsScreen(
             text = "Steps:",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface, // Text color
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(top = 16.dp)
           )
           item.steps.forEach { step ->
             Text(
               text = "${step.order}. ${step.description}",
               fontSize = 16.sp,
-              color = MaterialTheme.colorScheme.onSurface, // Text color
+              color = MaterialTheme.colorScheme.onSurface,
               modifier = Modifier.padding(start = 32.dp, bottom = 8.dp)
             )
           }
         }
       }
-    }
 
-    // Favorite button fixed at the bottom
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp)
-        .align(Alignment.BottomCenter)
-    ) {
-      IconButton(
-        onClick = {
-          if (isBookInFavorites) {
-            favoriteViewModel.deleteFromFavorites(
-              FavoriteItem(
-                title = item.title,
-                description = item.description,
-                imageResId = item.imageResId,
-                servings = item.servings
-              )
-            )
-          } else {
-            favoriteViewModel.addToFavorite(item)
+      // Related items section
+        if (relatedItems.isNotEmpty()) {
+        item {
+          Text(
+            text = "Related Items:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.padding(top = 16.dp)
+          )
+
+          LazyRow(
+            contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
+          ) {
+            items(relatedItems) { relatedItem ->
+              RelatedItemCard(relatedItem = relatedItem, navController = navController)
+
+            }
           }
-        },
+        }
+      }
+    }
+  }
+}
+
+@Composable
+fun RelatedItemCard(relatedItem: Recipe, navController: NavController) {
+  Box(
+    modifier = Modifier
+      .width(150.dp)
+      .padding(end = 8.dp)
+  ) {
+    Card(
+      shape = RoundedCornerShape(8.dp),
+
+      modifier = Modifier
+        .fillMaxSize()
+        .clickable { /* Navigate to related item details */ }
+    ) {
+      Column(
         modifier = Modifier
-          .size(50.dp)
-          .background(MaterialTheme.colorScheme.primary, CircleShape)
+          .fillMaxSize()
+          .padding(8.dp)
       ) {
-        Icon(
-          Icons.Default.Favorite,
-          contentDescription = "Favorite",
-          modifier = Modifier.size(32.dp),
-          tint = if (isBookInFavorites) Color.Red else Color.White
+        Image(
+          painter = painterResource(id = relatedItem.imageResId),
+          contentDescription = null,
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .clip(RoundedCornerShape(8.dp)),
+          contentScale = ContentScale.Crop
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+          text = relatedItem.title,
+          fontSize = 14.sp,
+          fontWeight = FontWeight.Bold,
+          maxLines = 2,
+          overflow = TextOverflow.Ellipsis
         )
       }
     }
   }
 }
+
+
 
 
 

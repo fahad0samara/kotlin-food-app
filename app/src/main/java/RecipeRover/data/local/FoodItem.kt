@@ -51,14 +51,16 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Peel and chop the mango, pineapple, and banana."),
       RecipeStep(2, "Blend the fruits with yogurt until smooth."),
-      RecipeStep(3, "Pour into a glass and enjoy.")
+      RecipeStep(3, "Pour into a glass and enjoy."),
+      RecipeStep(4, "Garnish with a slice of mango."),
+      RecipeStep(5, "Optional: Add ice cubes for extra chill."),
+      RecipeStep(6, "Serve and enjoy the tropical goodness!")
     ),
     1,
     5,
     10,
     "Easy",
     FoodType.Beverage
-
   ),
   Recipe(
     "Vegetarian Stir-Fry",
@@ -83,24 +85,27 @@ val availableRecipes = listOf(
     FoodType.MainCourse
   ),
   Recipe(
-    "Pesto Pasta with Cherry Tomatoes",
-    "Chef Elijah",
-    "Pasta tossed in a flavorful pesto sauce with fresh cherry tomatoes.",
-    R.drawable.pesto_pasta,
+    "Vegetarian Stir-Fry",
+    "Chef Noah",
+    "Colorful and nutritious stir-fry with a mix of vegetables and tofu.",
+    R.drawable.vegetarian_stir_fry,
     listOf(
-      Ingredient("Penne Pasta", IngredientType.Grain),
-      Ingredient("Basil Pesto", IngredientType.Other),
-      Ingredient("Cherry Tomatoes", IngredientType.Vegetable),
-      Ingredient("Parmesan Cheese", IngredientType.Dairy)
+      Ingredient("Tofu", IngredientType.Protein),
+      Ingredient("Broccoli", IngredientType.Vegetable),
+      Ingredient("Bell Peppers", IngredientType.Vegetable),
+      Ingredient("Soy Sauce", IngredientType.Other)
     ),
     listOf(
-      RecipeStep(1, "Cook pasta according to package instructions."),
-      RecipeStep(2, "Toss cooked pasta with pesto sauce."),
-      RecipeStep(3, "Add halved cherry tomatoes and grated Parmesan.")
+      RecipeStep(1, "Press and dice the tofu."),
+      RecipeStep(2, "Stir-fry tofu and vegetables in a hot pan."),
+      RecipeStep(3, "Add soy sauce for flavor."),
+      RecipeStep(4, "Continue stir-frying until vegetables are tender."),
+      RecipeStep(5, "Adjust seasoning according to taste."),
+      RecipeStep(6, "Serve hot and enjoy!")
     ),
-    3,
+    4,
+    15,
     20,
-    25,
     "Medium",
     FoodType.MainCourse
   ),
@@ -118,7 +123,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Layer yogurt, granola, and berries in a glass."),
       RecipeStep(2, "Repeat until the glass is full."),
-      RecipeStep(3, "Drizzle honey on top.")
+      RecipeStep(3, "Drizzle honey on top."),
+      RecipeStep(4, "Add another layer of granola."),
+      RecipeStep(5, "Top with more berries."),
+      RecipeStep(6, "Finish with a dollop of yogurt.")
     ),
     2,
     10,
@@ -139,8 +147,11 @@ val availableRecipes = listOf(
     ),
     listOf(
       RecipeStep(1, "Marinate salmon in teriyaki sauce, garlic, and ginger."),
-      RecipeStep(2, "Grill until salmon is cooked through."),
-      RecipeStep(3, "Serve with steamed rice.")
+      RecipeStep(2, "Preheat the grill to medium-high heat."),
+      RecipeStep(3, "Grill the salmon for 5-7 minutes per side, basting with teriyaki sauce."),
+      RecipeStep(4, "Check for doneness; the salmon should flake easily with a fork."),
+      RecipeStep(5, "Remove from the grill and let it rest for a few minutes."),
+      RecipeStep(6, "Serve the teriyaki salmon with steamed rice and your favorite vegetables.")
     ),
     4,
     15,
@@ -148,6 +159,7 @@ val availableRecipes = listOf(
     "Medium",
     FoodType.MainCourse
   ),
+
   Recipe(
     "Apple Cinnamon Pancakes",
     "Chef Mia",
@@ -162,14 +174,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Prepare pancake batter according to the mix."),
       RecipeStep(2, "Fold in diced apples and a pinch of cinnamon."),
-      RecipeStep(
-        3, "Cook pancakes on a griddle and serve with maple syrup."
-      ),
-        RecipeStep(4, "Prepare pancake batter according to the mix."),
-
+      RecipeStep(3, "Cook pancakes on a griddle and serve with maple syrup."),
+      RecipeStep(4, "Prepare pancake batter according to the mix."),
       RecipeStep(5, "Cook pancakes on a griddle and serve with maple syrup."),
-
-
+      RecipeStep(6, "Enjoy your delicious Apple Cinnamon Pancakes!")
     ),
     4,
     15,
@@ -191,7 +199,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Sauté vegetables in curry powder."),
       RecipeStep(2, "Add coconut milk and simmer until vegetables are tender."),
-      RecipeStep(3, "Serve over cooked basmati rice.")
+      RecipeStep(3, "Serve over cooked basmati rice."),
+      RecipeStep(4, "Garnish with cilantro for added freshness."),
+      RecipeStep(5, "Sprinkle with a pinch of garam masala for extra flavor."),
+      RecipeStep(6, "Enjoy your delicious vegetable curry!")
     ),
     4,
     20,
@@ -215,7 +226,9 @@ val availableRecipes = listOf(
       RecipeStep(1, "Preheat the oven to 475°F."),
       RecipeStep(2, "Roll out the pizza dough."),
       RecipeStep(3, "Top the dough with tomatoes, mozzarella, and basil."),
-      RecipeStep(4, "Bake in the oven for 12-15 minutes or until the crust is golden.")
+      RecipeStep(4, "Bake in the oven for 12-15 minutes or until the crust is golden."),
+      RecipeStep(5, "Remove from the oven and let it cool for a few minutes."),
+      RecipeStep(6, "Slice and enjoy your delicious Margherita Pizza!")
     ),
     1,
     15,
@@ -223,6 +236,7 @@ val availableRecipes = listOf(
     "Medium",
     FoodType.MainCourse
   ),
+
   Recipe(
     "Chicken Alfredo Pasta",
     "Chef Carla",
@@ -238,7 +252,9 @@ val availableRecipes = listOf(
       RecipeStep(1, "Cook the pasta according to package instructions."),
       RecipeStep(2, "Grill the chicken breast until fully cooked."),
       RecipeStep(3, "Prepare the Alfredo sauce by simmering heavy cream and Parmesan."),
-      RecipeStep(4, "Combine cooked pasta, grilled chicken, and Alfredo sauce.")
+      RecipeStep(4, "Combine cooked pasta, grilled chicken, and Alfredo sauce."),
+      RecipeStep(5, "Let the mixture simmer for 5 minutes."),
+      RecipeStep(6, "Serve hot and enjoy!")
     ),
     4,
     20,
@@ -260,7 +276,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Bake the chocolate brownie according to the recipe."),
       RecipeStep(2, "Scoop vanilla ice cream on top of the warm brownie."),
-      RecipeStep(3, "Drizzle chocolate sauce and add a dollop of whipped cream.")
+      RecipeStep(3, "Drizzle chocolate sauce and add a dollop of whipped cream."),
+      RecipeStep(4, "Wait for a moment to let the ice cream slightly melt."),
+      RecipeStep(5, "Use a fork to break into the warm brownie, mixing it with the melted ice cream."),
+      RecipeStep(6, "Enjoy the delightful combination of warm brownie, cold ice cream, and rich toppings.")
     ),
     2,
     15,
@@ -268,6 +287,7 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Dessert
   ),
+
   Recipe(
     "Spicy Chicken Wings",
     "Chef Alex",
@@ -282,7 +302,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Coat chicken wings with a mixture of spices and flour."),
       RecipeStep(2, "Fry the wings in hot oil until golden and crispy."),
-      RecipeStep(3, "Toss the wings in more spice mix before serving.")
+      RecipeStep(3, "Toss the wings in more spice mix before serving."),
+      RecipeStep(4, "Place the wings on a serving platter."),
+      RecipeStep(5, "Garnish with fresh cilantro or parsley."),
+      RecipeStep(6, "Serve with your favorite dipping sauce.")
     ),
     4,
     10,
@@ -290,6 +313,7 @@ val availableRecipes = listOf(
     "Medium",
     FoodType.Appetizer
   ),
+
   Recipe(
     "Iced Caramel Latte",
     "Chef Olivia",
@@ -304,7 +328,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Brew a strong cup of espresso."),
       RecipeStep(2, "Combine espresso, milk, and caramel syrup."),
-      RecipeStep(3, "Pour the mixture over ice and stir well.")
+      RecipeStep(3, "Pour the mixture over ice and stir well."),
+      RecipeStep(4, "Add a drizzle of caramel on top for extra sweetness."),
+      RecipeStep(5, "Garnish with whipped cream if desired."),
+      RecipeStep(6, "Enjoy your delicious iced caramel latte!")
     ),
     1,
     5,
@@ -312,6 +339,7 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Beverage
   ),
+
   Recipe(
     "Guacamole and Chips",
     "Chef Diego",
@@ -326,23 +354,25 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Mash avocados in a bowl."),
       RecipeStep(2, "Add diced tomatoes, onions, and lime juice."),
-      RecipeStep(3, "Season with salt and pepper. Serve with tortilla chips.")
+      RecipeStep(3, "Season with salt and pepper."),
+      RecipeStep(4, "Mix well until all ingredients are combined."),
+      RecipeStep(5, "Chill in the refrigerator for 30 minutes."),
+      RecipeStep(6, "Serve with crispy tortilla chips.")
     ),
     4,
     10,
     15,
     "Easy",
     FoodType.Appetizer
-  ),
+    ),
+
   Recipe(
     "Fruit Salad",
     "Chef Sofia",
     "A healthy and delicious mix of seasonal fruits, a perfect light option.",
     R.drawable.fruit_salad,
     listOf(
-      Ingredient
-
-        ("Strawberries", IngredientType.Fruit),
+      Ingredient("Strawberries", IngredientType.Fruit),
       Ingredient("Blueberries", IngredientType.Fruit),
       Ingredient("Grapes", IngredientType.Fruit),
       Ingredient("Kiwi", IngredientType.Fruit)
@@ -350,7 +380,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Wash and chop the fruits."),
       RecipeStep(2, "Combine the fruits in a large bowl."),
-      RecipeStep(3, "Chill in the refrigerator before serving.")
+      RecipeStep(3, "Chill in the refrigerator before serving."),
+      RecipeStep(4, "Enjoy your refreshing fruit salad!"),
+      RecipeStep(5, "Share with friends and family."),
+      RecipeStep(6, "Experiment with different fruit combinations.")
     ),
     4,
     10,
@@ -358,6 +391,7 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Snack
   ),
+
   Recipe(
     "Cheese Platter",
     "Chef Ethan",
@@ -371,7 +405,9 @@ val availableRecipes = listOf(
     ),
     listOf(
       RecipeStep(1, "Arrange a variety of cheeses on a platter."),
-      RecipeStep(2, "Add crackers and sliced fruits as accompaniments.")
+      RecipeStep(2, "Add crackers and sliced fruits as accompaniments."),
+      RecipeStep(3, "Garnish with fresh herbs for added flavor."),
+      RecipeStep(4, "Serve and enjoy!")
     ),
     4,
     15,
@@ -394,7 +430,9 @@ val availableRecipes = listOf(
       RecipeStep(1, "Preheat the oven to 350°F."),
       RecipeStep(2, "Cream together butter and brown sugar."),
       RecipeStep(3, "Mix in flour and chocolate chips."),
-      RecipeStep(4, "Drop spoonfuls of dough onto a baking sheet. Bake for 10-12 minutes.")
+      RecipeStep(4, "Drop spoonfuls of dough onto a baking sheet. Bake for 10-12 minutes."),
+      RecipeStep(5, "Allow cookies to cool on a wire rack."),
+      RecipeStep(6, "Indulge in the deliciousness!")
     ),
     4,
     15,
@@ -402,6 +440,8 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Dessert
   ),
+
+// Additional Recipe with more RecipeSteps for each type
   Recipe(
     "Caesar Salad",
     "Chef Julia",
@@ -416,7 +456,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Tear the lettuce into bite-sized pieces."),
       RecipeStep(2, "Add croutons and shaved Parmesan."),
-      RecipeStep(3, "Drizzle Caesar dressing and toss before serving.")
+      RecipeStep(3, "Drizzle Caesar dressing and toss before serving."),
+      RecipeStep(4, "Garnish with additional Parmesan."),
+      RecipeStep(5, "Optional: Add grilled chicken for extra protein."),
+      RecipeStep(6, "Serve chilled and enjoy!")
     ),
     2,
     10,
@@ -438,7 +481,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Cook linguine according to package instructions."),
       RecipeStep(2, "Sauté shrimp in garlic and white wine."),
-      RecipeStep(3, "Serve shrimp over cooked linguine.")
+      RecipeStep(3, "Serve shrimp over cooked linguine."),
+      RecipeStep(4, "Garnish with chopped parsley."),
+      RecipeStep(5, "Add a squeeze of fresh lemon juice."),
+      RecipeStep(6, "Sprinkle red pepper flakes for a hint of spice.")
     ),
     4,
     15,
@@ -446,6 +492,7 @@ val availableRecipes = listOf(
     "Medium",
     FoodType.MainCourse
   ),
+
   Recipe(
     "Blueberry Cheesecake",
     "Chef Isabella",
@@ -460,7 +507,10 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Preheat the oven to 325°F."),
       RecipeStep(2, "Mix cream cheese, sugar, and blueberries."),
-      RecipeStep(3, "Pour mixture into a graham cracker crust and bake for 45 minutes.")
+      RecipeStep(3, "Pour mixture into a graham cracker crust and bake for 45 minutes."),
+      RecipeStep(4, "Remove from the oven and let it cool."),
+      RecipeStep(5, "Refrigerate for at least 4 hours or overnight."),
+      RecipeStep(6, "Top with fresh blueberries before serving.")
     ),
     1,
     20,
@@ -468,6 +518,7 @@ val availableRecipes = listOf(
     "Difficult",
     FoodType.Dessert
   ),
+
   Recipe(
     "Caprese Skewers",
     "Chef Giovanni",
@@ -481,7 +532,11 @@ val availableRecipes = listOf(
     ),
     listOf(
       RecipeStep(1, "Thread mozzarella, tomatoes, and basil onto skewers."),
-      RecipeStep(2, "Drizzle with balsamic glaze before serving.")
+      RecipeStep(2, "Drizzle with balsamic glaze before serving."),
+      RecipeStep(3, "Serve chilled for a refreshing appetizer."),
+      RecipeStep(4, "Garnish with additional basil leaves."),
+      RecipeStep(5, "Enjoy the burst of flavors with each bite."),
+      RecipeStep(6, "Perfect for any party or gathering!")
     ),
     4,
     10,
@@ -489,6 +544,7 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Appetizer
   ),
+
   Recipe(
     "Iced Green Tea",
     "Chef Jasmine",
@@ -503,7 +559,8 @@ val availableRecipes = listOf(
     listOf(
       RecipeStep(1, "Steep green tea bags in hot water."),
       RecipeStep(2, "Sweeten with honey and cool in the refrigerator."),
-      RecipeStep(3, "Serve over ice with lemon wedges.")
+      RecipeStep(3, "Serve over ice with lemon wedges."),
+      RecipeStep(4, "Garnish with mint leaves for extra freshness.")
     ),
     1,
     5,
@@ -511,6 +568,7 @@ val availableRecipes = listOf(
     "Easy",
     FoodType.Beverage
   )
+
   // Add more recipes...
 )
 

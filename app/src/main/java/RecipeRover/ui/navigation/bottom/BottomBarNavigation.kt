@@ -1,5 +1,6 @@
 package com.fahad.RecipeRover.ui.navigation.bottom
 
+import RecipeRover.ui.RecipeViewModel
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,14 +24,17 @@ import com.fahad.RecipeRover.ui.screen.auth.profile.EditProfileScreen
 import com.fahad.RecipeRover.ui.screen.auth.profile.ProfileScreen
 
 import RecipeRover.ui.screen.cart.CartViewModel
+import android.annotation.SuppressLint
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteItemsScreen
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun BottomBarNavigation(navController: NavHostController,
 ) {
   val userDataViewModel: UserDataViewModel = hiltViewModel()
   val viewModel: CartViewModel = hiltViewModel()
   val favoriteViewModel: FavoriteViewModel = hiltViewModel()
+    val recipeViewModel: RecipeViewModel = hiltViewModel()
   LaunchedEffect(userDataViewModel.user) {
     userDataViewModel.getUserData() // Trigger fetching user data if not already done
 
@@ -45,7 +49,9 @@ fun BottomBarNavigation(navController: NavHostController,
     startDestination = BottomBar.Home.route
   ) {
     composable(route = BottomBar.Home.route) {
-      Home(viewModel, navController,userDataViewModel)
+      Home(
+        recipeViewModel,
+        navController,userDataViewModel)
     }
 
 
@@ -67,20 +73,22 @@ fun BottomBarNavigation(navController: NavHostController,
           navController = navController, userDataViewModel = userDataViewModel
         )
       }
-
     composable(
       "itemDetails/{itemName}",
       arguments = listOf(navArgument("itemName") { type = NavType.StringType })
     ) { backStackEntry ->
       val itemName = backStackEntry.arguments?.getString("itemName")
-      val selectedItem = viewModel.groupedItems.values.flatten()
-          .firstOrNull { it.title == itemName }
+      val selectedItem = recipeViewModel.recipes.value.find { it.title == itemName }
       selectedItem?.let { item ->
-        ItemDetailsScreen(item,  favoriteViewModel, navController)
+        ItemDetailsScreen(item, favoriteViewModel, navController, recipeViewModel)
       } ?: run {
         Text(text = "Item not found")
       }
     }
+
+
+
+
 
 
 
