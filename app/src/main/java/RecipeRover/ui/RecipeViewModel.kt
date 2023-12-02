@@ -9,8 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.time.LocalDateTime
 
-class RecipeViewModel
-constructor() : ViewModel() {
+class RecipeViewModel : ViewModel() {
 
 
   // Use StateFlow to observe changes in the recipes
@@ -44,6 +43,23 @@ constructor() : ViewModel() {
     }
 
     return _recipes.value.filter { it.mealTime == mealTime }
+  }
+
+  private fun getTimeOfDay(): MealTime {
+    val currentHour = LocalDateTime.now().hour
+    return when (currentHour) {
+      in 6..11 -> MealTime.Morning
+      in 12..17 -> MealTime.Evening
+      else -> MealTime.Night
+    }
+  }
+
+  fun getGreetingText(): String {
+    return when (getTimeOfDay()) {
+      MealTime.Morning -> "Start your day with these breakfast recipes!"
+      MealTime.Evening -> "Enjoy these evening meal recipes!"
+      MealTime.Night -> "End your day with these dinner recipes!"
+    }
   }
 
 
