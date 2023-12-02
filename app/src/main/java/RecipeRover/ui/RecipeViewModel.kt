@@ -1,12 +1,13 @@
 package RecipeRover.ui
 
 import RecipeRover.data.local.FoodType
+import RecipeRover.data.local.MealTime
 import RecipeRover.data.local.Recipe
 import RecipeRover.data.local.availableRecipes
-import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.time.LocalDateTime
 
 class RecipeViewModel
 constructor() : ViewModel() {
@@ -17,10 +18,9 @@ constructor() : ViewModel() {
   val recipes: StateFlow<List<Recipe>> get() = _recipes
 
   // Sample data initialization
-  init {
-    // Add your logic to fetch recipes from a data source (e.g., API, database)
-    _recipes.value = availableRecipes
-  }
+    init {
+        _recipes.value = availableRecipes
+    }
 
   // Add methods to fetch individual recipes, related recipes, etc.
 
@@ -33,6 +33,19 @@ constructor() : ViewModel() {
     // Add your logic to fetch related recipes based on the provided foodType
     return _recipes.value.filter { it.foodType == foodType }
   }
+
+
+  fun getRecipesByTimeOfDay(): List<Recipe> {
+    val currentHour = LocalDateTime.now().hour
+    val mealTime = when (currentHour) {
+      in 6..11 -> MealTime.Morning
+      in 12..17 -> MealTime.Evening
+      else -> MealTime.Night
+    }
+
+    return _recipes.value.filter { it.mealTime == mealTime }
+  }
+
 
 }
 

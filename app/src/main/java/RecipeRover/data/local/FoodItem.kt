@@ -9,6 +9,9 @@ enum class IngredientType {
   Other
 
 }
+enum class MealTime {
+  Morning, Evening, Night
+}
 
 data class Ingredient(
   val name: String,
@@ -31,12 +34,155 @@ data class Recipe(
   val preparationTime: Int, // in minutes
   val cookingTime: Int, // in minutes
   val difficultyLevel: String // Easy, Medium, Hard,
-    , val foodType: FoodType = FoodType.Other
+    , val foodType: FoodType = FoodType.Other,
+    val mealTime: MealTime = MealTime.Night
+
+
 
 )
 
 
 val availableRecipes = listOf(
+  Recipe(
+    "Morning Smoothie",
+    "Chef Morning",
+    "A refreshing smoothie to start your day.",
+    R.drawable.morning_smoothie,
+    listOf(
+      Ingredient("Banana", IngredientType.Fruit),
+      Ingredient("Strawberries", IngredientType.Fruit),
+      Ingredient("Yogurt", IngredientType.Dairy)
+    ),
+    listOf(
+      RecipeStep(1, "Peel and slice the banana."),
+      RecipeStep(2, "Wash and hull the strawberries."),
+      RecipeStep(3, "Blend the fruits with yogurt until smooth."),
+      RecipeStep(4, "Pour into a glass and enjoy your morning!")
+    ),
+    1,
+    5,
+    10,
+    "Easy",
+    FoodType.Breakfast,
+    MealTime.Morning
+  ),
+  Recipe(
+    "Evening Salad",
+    "Chef Evening",
+    "A light and tasty salad for the evening.",
+    R.drawable.evening_salad,
+    listOf(
+      Ingredient("Lettuce", IngredientType.Vegetable),
+      Ingredient("Tomato", IngredientType.Vegetable),
+      Ingredient("Cucumber", IngredientType.Vegetable),
+      Ingredient("Feta Cheese", IngredientType.Dairy)
+    ),
+    listOf(
+      RecipeStep(1, "Chop the lettuce, tomato, and cucumber."),
+      RecipeStep(2, "Crumble the feta cheese on top."),
+      RecipeStep(3, "Drizzle with your favorite dressing."),
+      RecipeStep(4, "Toss and enjoy your evening salad!")
+    ),
+    2,
+    10,
+    0,
+    "Easy",
+    FoodType.Dinner,
+    MealTime.Evening
+  ),
+  Recipe(
+    "Night Soup",
+    "Chef Night",
+    "A hearty soup for a cozy night.",
+    R.drawable.night_soup,
+    listOf(
+      Ingredient("Carrot", IngredientType.Vegetable),
+      Ingredient("Potato", IngredientType.Vegetable),
+      Ingredient("Chicken Broth", IngredientType.Meat)
+    ),
+    listOf(
+      RecipeStep(1, "Peel and chop the carrot and potato."),
+      RecipeStep(2, "Bring the chicken broth to a boil."),
+      RecipeStep(3, "Add the chopped vegetables to the broth."),
+      RecipeStep(4, "Simmer until vegetables are tender."),
+      RecipeStep(5, "Serve and enjoy your night soup!")
+    ),
+    4,
+    15,
+    25,
+    "Medium",
+    FoodType.Dinner,
+    MealTime.Night
+  ),
+  Recipe(
+    "Afternoon Snack",
+    "Chef Snack",
+    "A quick and delicious snack for the afternoon.",
+    R.drawable.afternoon_snack,
+    listOf(
+      Ingredient("Cheese", IngredientType.Dairy),
+      Ingredient("Grapes", IngredientType.Fruit),
+      Ingredient("Crackers", IngredientType.Grain)
+    ),
+    listOf(
+      RecipeStep(1, "Arrange cheese, grapes, and crackers on a plate."),
+      RecipeStep(2, "Enjoy your tasty afternoon snack!")
+    ),
+    2,
+    5,
+    0,
+    "Easy",
+    FoodType.Snack,
+    MealTime.Evening
+  ),
+  Recipe(
+    "Weekend Brunch",
+    "Chef Brunch",
+    "A leisurely brunch for the weekend.",
+    R.drawable.weekend_brunch,
+    listOf(
+      Ingredient("Eggs", IngredientType.Protein),
+      Ingredient("Avocado", IngredientType.Vegetable),
+      Ingredient("Bread", IngredientType.Grain)
+    ),
+    listOf(
+      RecipeStep(1, "Poach or fry the eggs."),
+      RecipeStep(2, "Slice the avocado."),
+      RecipeStep(3, "Toast the bread."),
+      RecipeStep(4, "Assemble eggs, avocado, and toast on a plate."),
+      RecipeStep(5, "Enjoy your delightful weekend brunch!")
+    ),
+    4,
+    20,
+    15,
+    "Medium",
+    FoodType.Breakfast,
+    MealTime.Morning
+  ),
+  Recipe(
+    "Late Night Snack",
+    "Chef Late Night",
+    "A satisfying late-night snack for your cravings.",
+    R.drawable.late_night_snack,
+    listOf(
+      Ingredient("Popcorn", IngredientType.Grain),
+      Ingredient("Chocolate", IngredientType.Dessert),
+      Ingredient("Nuts", IngredientType.Protein)
+    ),
+    listOf(
+      RecipeStep(1, "Pop the popcorn."),
+      RecipeStep(2, "Melt chocolate."),
+      RecipeStep(3, "Mix popcorn, melted chocolate, and nuts."),
+      RecipeStep(4, "Enjoy your delicious late-night snack!")
+    ),
+    2,
+    10,
+    5,
+    "Easy",
+    FoodType.Snack,
+    MealTime.Night
+  ),
+
   Recipe(
     "Mango Tango Smoothie",
     "Chef Aria",
@@ -60,7 +206,8 @@ val availableRecipes = listOf(
     5,
     10,
     "Easy",
-    FoodType.Beverage
+    FoodType.Beverage,
+    MealTime.Morning
   ),
   Recipe(
     "Vegetarian Stir-Fry",
@@ -82,7 +229,8 @@ val availableRecipes = listOf(
     15,
     20,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Evening
   ),
   Recipe(
     "Vegetarian Stir-Fry",
@@ -107,7 +255,8 @@ val availableRecipes = listOf(
     15,
     20,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Evening
   ),
   Recipe(
     "Berry Parfait",
@@ -132,7 +281,8 @@ val availableRecipes = listOf(
     10,
     15,
     "Easy",
-    FoodType.Dessert
+    FoodType.Dessert,
+    MealTime.Morning
   ),
   Recipe(
     "Teriyaki Salmon",
@@ -157,7 +307,8 @@ val availableRecipes = listOf(
     15,
     20,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Evening
   ),
 
   Recipe(
@@ -183,7 +334,8 @@ val availableRecipes = listOf(
     15,
     25,
     "Medium",
-    FoodType.Breakfast
+    FoodType.Breakfast,
+    MealTime.Morning
   ),
   Recipe(
     "Vegetable Curry",
@@ -208,7 +360,8 @@ val availableRecipes = listOf(
     20,
     30,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Evening
   ),
 
   Recipe(
@@ -234,7 +387,8 @@ val availableRecipes = listOf(
     15,
     15,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Night
   ),
 
   Recipe(
@@ -260,7 +414,8 @@ val availableRecipes = listOf(
     20,
     25,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Night
   ),
   Recipe(
     "Chocolate Brownie Sundae",
@@ -285,7 +440,8 @@ val availableRecipes = listOf(
     15,
     20,
     "Easy",
-    FoodType.Dessert
+    FoodType.Dessert,
+    MealTime.Night
   ),
 
   Recipe(
@@ -311,7 +467,8 @@ val availableRecipes = listOf(
     10,
     20,
     "Medium",
-    FoodType.Appetizer
+    FoodType.Appetizer,
+    MealTime.Evening
   ),
 
   Recipe(
@@ -337,7 +494,8 @@ val availableRecipes = listOf(
     5,
     5,
     "Easy",
-    FoodType.Beverage
+    FoodType.Beverage,
+    MealTime.Morning
   ),
 
   Recipe(
@@ -363,7 +521,8 @@ val availableRecipes = listOf(
     10,
     15,
     "Easy",
-    FoodType.Appetizer
+    FoodType.Appetizer,
+    MealTime.Evening
     ),
 
   Recipe(
@@ -389,7 +548,8 @@ val availableRecipes = listOf(
     10,
     10,
     "Easy",
-    FoodType.Snack
+    FoodType.Snack,
+    MealTime.Night
   ),
 
   Recipe(
@@ -413,7 +573,8 @@ val availableRecipes = listOf(
     15,
     15,
     "Easy",
-    FoodType.Appetizer
+    FoodType.Appetizer,
+    MealTime.Evening
   ),
   Recipe(
     "Chocolate Chip Cookies",
@@ -438,7 +599,8 @@ val availableRecipes = listOf(
     15,
     30,
     "Easy",
-    FoodType.Dessert
+    FoodType.Dessert,
+    MealTime.Night
   ),
 
 // Additional Recipe with more RecipeSteps for each type
@@ -465,7 +627,8 @@ val availableRecipes = listOf(
     10,
     15,
     "Easy",
-    FoodType.Appetizer
+    FoodType.Appetizer,
+    MealTime.Evening
   ),
   Recipe(
     "Shrimp Scampi",
@@ -490,7 +653,8 @@ val availableRecipes = listOf(
     15,
     20,
     "Medium",
-    FoodType.MainCourse
+    FoodType.MainCourse,
+    MealTime.Evening
   ),
 
   Recipe(
@@ -516,7 +680,8 @@ val availableRecipes = listOf(
     20,
     45,
     "Difficult",
-    FoodType.Dessert
+    FoodType.Dessert,
+    MealTime.Night
   ),
 
   Recipe(
@@ -542,7 +707,8 @@ val availableRecipes = listOf(
     10,
     15,
     "Easy",
-    FoodType.Appetizer
+    FoodType.Appetizer,
+    MealTime.Evening
   ),
 
   Recipe(
@@ -566,7 +732,8 @@ val availableRecipes = listOf(
     5,
     10,
     "Easy",
-    FoodType.Beverage
+    FoodType.Beverage,
+    MealTime.Morning
   )
 
   // Add more recipes...

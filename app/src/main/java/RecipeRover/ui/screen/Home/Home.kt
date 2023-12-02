@@ -1,8 +1,10 @@
-package RecipeRover.ui.screen
+package RecipeRover.ui.screen.Home
 
 import RecipeRover.data.local.FoodType
 import RecipeRover.data.local.Recipe
 import RecipeRover.ui.RecipeViewModel
+import RecipeRover.ui.screen.Home.component.CardsSection
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 
@@ -71,6 +73,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.text.style.TextAlign
 import com.fahad.RecipeRover.ui.screen.UserDataViewModel
 import com.fahad.RecipeRover.ui.theme.dimens
 
@@ -79,6 +83,7 @@ import java.time.LocalTime
 
 
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun Home(
   recipeViewModel: RecipeViewModel,
@@ -86,15 +91,10 @@ fun Home(
   userDataViewModel: UserDataViewModel
 ) {
   val selectedCategory = remember { mutableStateOf(FoodType.Appetizer) }
-
-
-
+  val recipes = recipeViewModel.recipes.collectAsState().value
   // Filter recipes based on the selected category
-  val itemsForCategory by remember(selectedCategory.value) {
-    derivedStateOf {
-      val category = selectedCategory.value.name
-      recipeViewModel.recipes.value.filter { it.foodType.name == category }
-    }
+  val itemsForCategory by derivedStateOf {
+    recipes.filter { it.foodType == selectedCategory.value }
   }
 
 
@@ -231,12 +231,14 @@ fun Home(
       placeholder = { Text("Search for books") }
     )
 
-    Spacer(modifier = Modifier.height(16.dp))
     CardsSection(
-      foodType = FoodType.Appetizer,
+
       recipeViewModel = recipeViewModel,
       navController = navController
     )
+
+    Spacer(modifier = Modifier.height(16.dp))
+
 
     CategorySelection(selectedCategory)
 
@@ -244,6 +246,7 @@ fun Home(
         recipeViewModel,
         navController,
         itemsForCategory
+
         )
 
   }
@@ -285,6 +288,8 @@ fun FoodList(
   recipeViewModel: RecipeViewModel,
   navController: NavController,
   itemsForCategory: List<Recipe>
+
+
 ) {
 
 
@@ -394,86 +399,10 @@ fun FoodItem(
 
 
 
-@Composable
-fun CardsSection(
-    foodType: FoodType,
-  recipeViewModel: RecipeViewModel,
-  navController: NavController
-) {
-    val recipesForType = recipeViewModel.getRelatedRecipes(foodType)
-
-  LazyRow {
-    items(recipesForType) { recipe ->
-      CardItem(recipe = recipe, navController = navController)
-    }
-  }
-}
-
-
-
-@Composable
-fun CardItem(
-  recipe: Recipe, navController: NavController
-) {
 
 
 
 
-
-
-  Box(
-    modifier = Modifier
-      .padding(start = 16.dp,
-        end = 16.dp,
-        )
-  ) {
-    Box(
-      modifier = Modifier
-        .clip(RoundedCornerShape(25.dp))
-        .background(
-            color = colorResource(id = R.color.black).copy(alpha = 0.7f)
-            )
-        .width(250.dp)
-        .height(160.dp)
-
-
-    ) {
-
-      Image(
-          painter = painterResource(id = recipe.imageResId),
-        contentDescription = recipe.title,
-        modifier = Modifier .width(250.dp)
-          .height(160.dp),
-        contentScale = ContentScale.Crop
-
-      )
-
-      Spacer(modifier = Modifier.height(10.dp))
-
-      Text(
-        text = recipe.title,
-        color = Color.White,
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Bold
-      )
-
-      Text(
-        text = recipe.title,
-        color = Color.White,
-        fontSize = 22.sp,
-        fontWeight = FontWeight.Bold
-      )
-
-      Text(
-        text = recipe.title,
-        color = Color.White,
-        fontSize = 18.sp,
-        fontWeight = FontWeight.Bold
-      )
-
-    }
-  }
-}
 
 
 
