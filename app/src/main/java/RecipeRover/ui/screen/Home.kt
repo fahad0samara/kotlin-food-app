@@ -1,8 +1,7 @@
-package com.fahad.RecipeRover.ui.screen
+package RecipeRover.ui.screen
 
 import RecipeRover.data.local.FoodType
 import RecipeRover.data.local.Recipe
-import RecipeRover.data.local.availableRecipes
 import RecipeRover.ui.RecipeViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -67,10 +66,12 @@ import com.fahad.RecipeRover.R
 
 
 import com.fahad.RecipeRover.ui.navigation.bottom.SearchNavGraph
-import RecipeRover.ui.screen.cart.CartViewModel
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.ui.draw.clip
+import com.fahad.RecipeRover.ui.screen.UserDataViewModel
 import com.fahad.RecipeRover.ui.theme.dimens
 
 import java.time.LocalTime
@@ -230,6 +231,13 @@ fun Home(
       placeholder = { Text("Search for books") }
     )
 
+    Spacer(modifier = Modifier.height(16.dp))
+    CardsSection(
+      foodType = FoodType.Appetizer,
+      recipeViewModel = recipeViewModel,
+      navController = navController
+    )
+
     CategorySelection(selectedCategory)
 
     FoodList(
@@ -384,6 +392,88 @@ fun FoodItem(
   }
 }
 
+
+
+@Composable
+fun CardsSection(
+    foodType: FoodType,
+  recipeViewModel: RecipeViewModel,
+  navController: NavController
+) {
+    val recipesForType = recipeViewModel.getRelatedRecipes(foodType)
+
+  LazyRow {
+    items(recipesForType) { recipe ->
+      CardItem(recipe = recipe, navController = navController)
+    }
+  }
+}
+
+
+
+@Composable
+fun CardItem(
+  recipe: Recipe, navController: NavController
+) {
+
+
+
+
+
+
+  Box(
+    modifier = Modifier
+      .padding(start = 16.dp,
+        end = 16.dp,
+        )
+  ) {
+    Box(
+      modifier = Modifier
+        .clip(RoundedCornerShape(25.dp))
+        .background(
+            color = colorResource(id = R.color.black).copy(alpha = 0.7f)
+            )
+        .width(250.dp)
+        .height(160.dp)
+
+
+    ) {
+
+      Image(
+          painter = painterResource(id = recipe.imageResId),
+        contentDescription = recipe.title,
+        modifier = Modifier .width(250.dp)
+          .height(160.dp),
+        contentScale = ContentScale.Crop
+
+      )
+
+      Spacer(modifier = Modifier.height(10.dp))
+
+      Text(
+        text = recipe.title,
+        color = Color.White,
+        fontSize = 17.sp,
+        fontWeight = FontWeight.Bold
+      )
+
+      Text(
+        text = recipe.title,
+        color = Color.White,
+        fontSize = 22.sp,
+        fontWeight = FontWeight.Bold
+      )
+
+      Text(
+        text = recipe.title,
+        color = Color.White,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold
+      )
+
+    }
+  }
+}
 
 
 
