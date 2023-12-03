@@ -40,7 +40,7 @@ fun SearchHome(
     onValueChange = { },
     modifier = Modifier
       .fillMaxWidth()
-      .padding(dimens.medium1)
+      .padding(dimens.small3)
       .height(dimens.logoSize1)
       .onFocusChanged {
         if (it.isFocused) {
@@ -76,7 +76,7 @@ fun SearchHome(
 
 
       ),
-    shape = CutCornerShape(dimens.small3),
+    shape = CutCornerShape(dimens.small2),
 
 
     placeholder = { Text("Search for recipes") }

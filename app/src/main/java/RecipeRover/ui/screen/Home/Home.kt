@@ -9,7 +9,6 @@ import RecipeRover.ui.screen.Home.component.UserName
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,26 +18,18 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-
 import androidx.compose.foundation.layout.padding
-
 import androidx.compose.foundation.layout.systemBarsPadding
-
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-
 import androidx.compose.foundation.shape.CutCornerShape
-
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-
 import androidx.compose.material3.MaterialTheme
-
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
@@ -47,21 +38,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
 import com.fahad.RecipeRover.R
-
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.derivedStateOf
@@ -86,17 +72,17 @@ fun Home(
     modifier = Modifier
       .fillMaxSize()
       .background(MaterialTheme.colorScheme.background)
-      .padding(top = 15.dp)
+      .padding(top = dimens.small2)
 
       // Add padding for status bar
       .systemBarsPadding()
-      .padding(bottom = 66.dp)
+      .padding(bottom = dimens.large)
 
   ) {
     UserName(
       userDataViewModel = userDataViewModel
     )
-    Spacer(modifier = Modifier.height(16.dp))
+    Spacer(modifier = Modifier.height(dimens.small2))
 
     SearchHome(
       navController = navController
@@ -108,7 +94,7 @@ fun Home(
       recipeViewModel = recipeViewModel, navController = navController
     )
 
-    Spacer(modifier = Modifier.height(16.dp))
+    Spacer(modifier = Modifier.height(dimens.small2))
 
 
     CategorySelection(selectedCategory)
@@ -126,7 +112,7 @@ fun CategorySelection(selectedCategory: MutableState<FoodType>) {
   LazyRow(
     modifier = Modifier
       .fillMaxWidth()
-      .padding(top = 8.dp)
+      .padding(top = dimens.small2, start = dimens.small2, end = dimens.small2)
       .height(dimens.logoSize1),
     horizontalArrangement = Arrangement.spacedBy(2.dp),
 
@@ -181,7 +167,7 @@ fun FoodItem(
   Card(
     modifier = Modifier
       .fillMaxWidth()
-      .padding(8.dp),
+      .padding(dimens.small2),
     onClick = { onTap(food) },
     shape = CutCornerShape(8.dp),
   ) {
@@ -194,7 +180,7 @@ fun FoodItem(
         contentDescription = null,
         modifier = Modifier
           .fillMaxWidth()
-          .height(190.dp),
+          .height(dimens.widthImage),
         contentScale = ContentScale.Crop
       )
       Box(
@@ -235,14 +221,15 @@ fun FoodItem(
             horizontalArrangement = Arrangement.SpaceBetween
           ) {
             Text(
-              text = "${food.servings} servings", // Assuming there's a 'servings' property in FoodItem
+              text = "${food.servings} servings",
               fontSize = 14.sp,
               color = Color.White,
             )
             Text(
-              text = "${food.cookingTime} calories", // Assuming there's a 'calories' property in FoodItem
+              text =food.difficultyLevel,
               fontSize = 14.sp,
               color = Color.White,
+              fontWeight = FontWeight.Bold
             )
           }
         }
