@@ -27,11 +27,9 @@ import com.fahad.RecipeRover.R
 
 
 
-import com.fahad.RecipeRover.ui.navigation.bottom.BottomBarRoot
+import RecipeRover.ui.navigation.bottom.BottomBarRoot
 import com.fahad.RecipeRover.ui.screen.UserDataViewModel
-import com.fahad.RecipeRover.ui.screen.auth.login.LoginScreen
 import com.fahad.RecipeRover.ui.screen.auth.login.LoginViewModel
-import com.fahad.RecipeRover.ui.screen.auth.register.RegisterScreen
 import com.fahad.RecipeRover.ui.screen.auth.register.RegisterViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth

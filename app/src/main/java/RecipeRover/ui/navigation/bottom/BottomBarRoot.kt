@@ -1,6 +1,6 @@
-@file:JvmName("BottomBarKt")
 
-package com.fahad.RecipeRover.ui.navigation.bottom
+
+package RecipeRover.ui.navigation.bottom
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -29,6 +29,7 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import RecipeRover.ui.screen.cart.CartViewModel
+import com.fahad.RecipeRover.ui.navigation.bottom.BottomBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.navigation.bottom
+package RecipeRover.ui.navigation.bottom
 
 import RecipeRover.ui.RecipeViewModel
 import androidx.compose.material3.Text
@@ -14,8 +14,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 
-
-
 import RecipeRover.ui.screen.Home.Home
 import RecipeRover.ui.screen.Home.ItemDetailsScreen
 
@@ -25,16 +23,21 @@ import com.fahad.RecipeRover.ui.screen.auth.profile.ProfileScreen
 
 import RecipeRover.ui.screen.cart.CartViewModel
 import android.annotation.SuppressLint
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.navigation
+import com.fahad.RecipeRover.ui.navigation.bottom.BottomBar
+import RecipeRover.ui.screen.Home.search.SearchScreen
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteItemsScreen
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun BottomBarNavigation(navController: NavHostController,
+fun BottomBarNavigation(
+  navController: NavHostController,
 ) {
   val userDataViewModel: UserDataViewModel = hiltViewModel()
   val viewModel: CartViewModel = hiltViewModel()
   val favoriteViewModel: FavoriteViewModel = hiltViewModel()
-    val recipeViewModel: RecipeViewModel = hiltViewModel()
+  val recipeViewModel: RecipeViewModel = hiltViewModel()
   LaunchedEffect(userDataViewModel.user) {
     userDataViewModel.getUserData() // Trigger fetching user data if not already done
 
@@ -44,14 +47,12 @@ fun BottomBarNavigation(navController: NavHostController,
 
 
   NavHost(
-    navController = navController,
-    route = "root",
-    startDestination = BottomBar.Home.route
+    navController = navController, route = "root", startDestination = BottomBar.Home.route
   ) {
     composable(route = BottomBar.Home.route) {
       Home(
-        recipeViewModel,
-        navController,userDataViewModel)
+        recipeViewModel, navController, userDataViewModel
+      )
     }
 
 
@@ -64,15 +65,14 @@ fun BottomBarNavigation(navController: NavHostController,
 
     composable(route = BottomBar.Profile.route) {
       ProfileScreen(
-        navController = navController,
-        userDataViewModel = userDataViewModel
+        navController = navController, userDataViewModel = userDataViewModel
       )
     }
-      composable(route =  "edit_profile") {
-        EditProfileScreen(
-          navController = navController, userDataViewModel = userDataViewModel
-        )
-      }
+    composable(route = "edit_profile") {
+      EditProfileScreen(
+        navController = navController, userDataViewModel = userDataViewModel
+      )
+    }
     composable(
       "itemDetails/{itemName}",
       arguments = listOf(navArgument("itemName") { type = NavType.StringType })
@@ -88,35 +88,26 @@ fun BottomBarNavigation(navController: NavHostController,
 
 
 
+    searchNavGraph(navController = navController)
 
-
-
-
-
-//    searchNavGraph(navController = navController)
   }
 }
 
-//fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
-//
-//  navigation(
-//    route = Graph.SEARCH.route,
-//    startDestination = SearchNavGraph.Search.route
-//  ) {
-//    composable(route = SearchNavGraph.Search.route) {
-//        SearchScreen(navController = navController, viewModel = hiltViewModel())
-//
-//
-//
-//    }
-//
-//    }
-//  }
+fun NavGraphBuilder.searchNavGraph(navController: NavHostController) {
 
+  navigation(
+    startDestination = "search",
+    route = "search_nav_graph",
 
-sealed class SearchNavGraph(val route: String) {
-  data object Search : SearchNavGraph(route = "Search")
+    ) {
+    composable(route = "search") {
+      SearchScreen(navController = navController, viewModel = hiltViewModel())
 
+    }
+
+  }
 }
+
+
 
 

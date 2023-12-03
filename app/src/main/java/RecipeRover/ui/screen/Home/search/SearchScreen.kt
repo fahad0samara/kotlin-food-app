@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.screen
+package RecipeRover.ui.screen.Home.search
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -48,6 +48,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fahad.RecipeRover.R
 import RecipeRover.ui.screen.cart.CartViewModel
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.systemBarsPadding
+import com.fahad.RecipeRover.ui.theme.dimens
 
 @Composable
 fun SearchScreen(
@@ -59,14 +62,19 @@ fun SearchScreen(
         searchText.isEmpty() || book.title.contains(searchText, ignoreCase = true)
     }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+      modifier = Modifier
+        .fillMaxSize()
+        .background(MaterialTheme.colorScheme.background)
+        .padding(top = dimens.medium1)
+
+        // Add padding for status bar
+        .systemBarsPadding()
+        .padding(bottom = dimens.large)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .padding(bottom = dimens.medium1),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // Back button
@@ -85,22 +93,22 @@ fun SearchScreen(
                 placeholder = { Text(text = stringResource(id = R.string.search_food)) },
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 16.dp),
+                    .padding(end = dimens.medium1),
                 trailingIcon = {
                     Icon(
                         Icons.Default.Search,
                         modifier = Modifier
-                            .padding(8.dp)
-                            .size(24.dp),
+                            .padding(dimens.small2)
+                            .size(dimens.medium2),
 
                         contentDescription = null,
-                        tint = Color(0xFF91F1FF)
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 },
                 colors = TextFieldDefaults.colors(
 
                     unfocusedIndicatorColor = Color.Transparent,
-                    focusedIndicatorColor = Color(0xFF91F1FF),
+                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                     disabledContainerColor = Color.Transparent,
                     disabledIndicatorColor = Color.Transparent,
                     disabledTextColor = Color.Transparent,
@@ -143,9 +151,9 @@ fun SearchScreen(
                                         contentDescription = null,
                                         contentScale = ContentScale.Crop,
                                         modifier = Modifier
-                                            .size(100.dp)
+                                            .size(dimens.heightImage)
                                     )
-                                    Spacer(modifier = Modifier.width(16.dp))
+                                    Spacer(modifier = Modifier.width(dimens.medium1))
                                     Column(
                                         modifier = Modifier
                                             .fillMaxSize()
@@ -178,7 +186,7 @@ fun SearchScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(dimens.medium1),
                 )
             }
         }
