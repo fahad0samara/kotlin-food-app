@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 
 @Composable
 fun NavigationText(

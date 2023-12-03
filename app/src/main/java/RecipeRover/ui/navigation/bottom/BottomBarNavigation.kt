@@ -15,7 +15,7 @@ import androidx.navigation.navArgument
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 
 import RecipeRover.ui.screen.Home.Home
-import RecipeRover.ui.screen.Home.ItemDetailsScreen
+import RecipeRover.ui.screen.Home.details.ItemDetailsScreen
 
 import com.fahad.RecipeRover.ui.screen.UserDataViewModel
 import com.fahad.RecipeRover.ui.screen.auth.profile.EditProfileScreen

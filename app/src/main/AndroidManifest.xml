@@ -14,7 +14,7 @@
         android:theme="@style/Theme.TastyBite"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="RecipeRover.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.TastyBite">
             <intent-filter>

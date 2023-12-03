@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.theme
+package RecipeRover.ui.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider

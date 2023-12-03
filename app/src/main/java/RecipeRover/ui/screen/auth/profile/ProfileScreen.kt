@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 
 import androidx.navigation.NavController
-import com.fahad.RecipeRover.ui.MainActivity
+import RecipeRover.ui.MainActivity
 
 import com.fahad.RecipeRover.util.Button.LoadingButton
 import com.fahad.RecipeRover.util.snackBar.SnackbarWrapperProfile

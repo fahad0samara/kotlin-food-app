@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 import com.fahad.RecipeRover.domain.model.Response
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 
 @Composable
  fun DisplayError(loginResult: Response<Any>) {

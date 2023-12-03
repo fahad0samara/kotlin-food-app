@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.theme
+package RecipeRover.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.fahad.RecipeRover.ui.MainActivity
+import RecipeRover.ui.MainActivity
 
 private val LightColors = lightColorScheme(
   primary = md_theme_light_primary,

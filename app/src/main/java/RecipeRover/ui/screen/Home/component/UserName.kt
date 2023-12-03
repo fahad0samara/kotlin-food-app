@@ -26,7 +26,7 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import com.fahad.RecipeRover.ui.screen.UserDataViewModel
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 import java.time.LocalTime
 
 @Composable

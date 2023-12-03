@@ -33,7 +33,7 @@ import com.fahad.RecipeRover.R
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.text.font.FontStyle.Companion.Italic
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 
 @Composable
 fun CardsSection(
@@ -53,7 +53,7 @@ fun CardsSection(
       fontWeight = FontWeight.Bold,
       fontStyle = Italic,
 
-      color = Color.White
+      color = MaterialTheme.colorScheme.primary
     )
 
     LazyRow {

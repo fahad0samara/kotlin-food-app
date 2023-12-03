@@ -50,7 +50,7 @@ import com.fahad.RecipeRover.R
 import RecipeRover.ui.screen.cart.CartViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.systemBarsPadding
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 
 @Composable
 fun SearchScreen(

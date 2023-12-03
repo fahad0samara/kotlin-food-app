@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import com.fahad.RecipeRover.domain.model.Response
 import com.fahad.RecipeRover.domain.model.User
 import com.fahad.RecipeRover.domain.repository.AuthRepository
-import com.fahad.RecipeRover.ui.MainActivity
+import RecipeRover.ui.MainActivity
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 

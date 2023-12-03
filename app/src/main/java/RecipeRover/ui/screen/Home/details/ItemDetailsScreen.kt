@@ -1,4 +1,4 @@
-package RecipeRover.ui.screen.Home
+package RecipeRover.ui.screen.Home.details
 
 import RecipeRover.data.local.Recipe
 import androidx.compose.foundation.Image
@@ -50,7 +50,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.ui.text.style.TextOverflow
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
-import com.fahad.RecipeRover.ui.theme.dimens
+import RecipeRover.ui.theme.dimens
 
 @Composable
 fun ItemDetailsScreen(

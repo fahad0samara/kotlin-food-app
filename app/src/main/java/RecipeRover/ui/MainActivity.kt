@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui
+package RecipeRover.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.fahad.RecipeRover.ui.navigation.RootNavigation
 
 
-import com.fahad.RecipeRover.ui.theme.TastyBiteTheme
+import RecipeRover.ui.theme.TastyBiteTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
