@@ -59,7 +59,7 @@ fun AsyncImageProfile(photoUrl: String?) {
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(dimens.logoSize)
                         .align(Alignment.Center),
                     color = Color.White
                 )

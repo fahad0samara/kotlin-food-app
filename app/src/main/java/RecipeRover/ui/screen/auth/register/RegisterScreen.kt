@@ -41,7 +41,7 @@ import com.fahad.RecipeRover.ui.screen.auth.compenets.DisplayError
 import com.fahad.RecipeRover.ui.screen.auth.compenets.EmailAndPasswordInputs
 import com.fahad.RecipeRover.ui.screen.auth.compenets.NavigationText
 import RecipeRover.ui.theme.dimens
-import com.fahad.RecipeRover.util.Button.LoadingButton
+import RecipeRover.util.Button.LoadingButton
 import com.fahad.RecipeRover.util.image.AsyncImageProfile
 
 

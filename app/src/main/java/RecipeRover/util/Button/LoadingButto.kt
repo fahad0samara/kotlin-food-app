@@ -1,5 +1,6 @@
-package com.fahad.RecipeRover.util.Button
+package RecipeRover.util.Button
 
+import RecipeRover.ui.theme.dimens
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,11 +18,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoadingButton(
+    modifier: Modifier = Modifier,
     text: String,
     isLoading: Boolean,
     onClick: () -> Unit,
     enabled: Boolean = true, // Default to true
-    modifier: Modifier = Modifier,
     textloading: String
 ) {
     Button(
@@ -32,10 +33,12 @@ fun LoadingButton(
         if (isLoading) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
+                    modifier = Modifier.size(
+                      dimens.medium1
+                    ).align(Alignment.CenterVertically),
                     color = Color.Black
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(dimens.small1))
                 //the texy be as the loading
                 Text(text = textloading)
 

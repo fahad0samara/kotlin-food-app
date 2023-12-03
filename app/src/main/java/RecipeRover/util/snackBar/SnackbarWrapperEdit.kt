@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.util.snackBar
+package RecipeRover.util.snackBar
 
 
 import androidx.compose.foundation.layout.fillMaxWidth

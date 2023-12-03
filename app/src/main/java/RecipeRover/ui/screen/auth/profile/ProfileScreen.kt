@@ -46,7 +46,7 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import RecipeRover.ui.MainActivity
 
-import com.fahad.RecipeRover.util.Button.LoadingButton
+import RecipeRover.util.Button.LoadingButton
 import com.fahad.RecipeRover.util.snackBar.SnackbarWrapperProfile
 
 import com.fahad.RecipeRover.util.image.AsyncImageProfile
