@@ -171,7 +171,7 @@ fun RegisterScreen(
             NavigationText(
                 text = "Already have an account? Login",
                 onClick = {
-//                    navController.navigate(AuthScreen.LOGIN.route)
+                    navController.navigate("login")
                 }
             )
         }

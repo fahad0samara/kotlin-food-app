@@ -1,5 +1,6 @@
 package com.fahad.RecipeRover.ui.navigation
 
+import RecipeRover.ui.navigation.auth.authNavigation
 import androidx.compose.foundation.Image
 
 import androidx.compose.foundation.layout.Arrangement
@@ -65,17 +66,12 @@ fun RootNavigation(navController: NavHostController) {
     composable(route = "splash") {
       SplashScreen()
     }
+    authNavigation(
+        navController = navController,
+        loginViewModel = loginViewModel,
+        registerViewModel = registerViewModel,
 
-    composable("login") {
-      LoginScreen(
-        navController = navController, loginViewModel = loginViewModel
-      )
-    }
-    composable( "register") {
-      RegisterScreen(
-        navController = navController, registerViewModel = registerViewModel
-      )
-    }
+    )
 
     composable(route = "home") {
       BottomBarRoot()
