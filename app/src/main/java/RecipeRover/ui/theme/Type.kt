@@ -92,7 +92,7 @@ val CompactMediumTypography = Typography(
   titleMedium = TextStyle(
     fontFamily = Inter,
     fontWeight = FontWeight.Medium,
-    fontSize = 20.sp
+    fontSize = 18.sp
   ),
   labelMedium = TextStyle(
     fontFamily = Roboto,
@@ -116,7 +116,7 @@ val MediumDimensTypography = Typography(
   titleMedium = TextStyle(
     fontFamily = Inter,
     fontWeight = FontWeight.Medium,
-    fontSize = 25.sp
+    fontSize = 23.sp
   ),
   labelMedium = TextStyle(
     fontFamily = Roboto,
@@ -141,7 +141,7 @@ val MediumDimensTypography = Typography(
   titleMedium = TextStyle(
     fontFamily = Inter,
     fontWeight = FontWeight.Medium,
-    fontSize = 16.sp
+    fontSize = 25.sp
   ),
   labelMedium = TextStyle(
     fontFamily = Roboto,
@@ -164,7 +164,7 @@ val ExpandedTypography = Typography(
   titleMedium = TextStyle(
     fontFamily = Inter,
     fontWeight = FontWeight.Medium,
-    fontSize = 18.sp
+    fontSize = 24.sp
   ),
   labelMedium = TextStyle(
     fontFamily = Roboto,

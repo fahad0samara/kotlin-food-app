@@ -18,7 +18,9 @@ data class Dimens(
   val logoSize1: Dp = 0.dp,
   val logoSize2: Dp = 0.dp,
   val imageSize0: Dp = 0.dp,
-  val imageSize: Dp = 0.dp
+  val imageSize: Dp = 0.dp,
+  val widthImage: Dp = 0.dp,
+  val heightImage: Dp = 0.dp,
 )
 
 val VerySmallDimens = Dimens(
@@ -35,7 +37,11 @@ val VerySmallDimens = Dimens(
   logoSize1 = 40.dp,
   logoSize2 = 50.dp,
   imageSize0 = 50.dp,
-  imageSize = 95.dp
+  heightImage=70.dp,
+  imageSize = 95.dp,
+    widthImage=150.dp,
+
+
 )
 
 val CompactDimens = Dimens(
@@ -52,7 +58,10 @@ val CompactDimens = Dimens(
   logoSize1 = 50.dp,
   logoSize2 = 60.dp,
   imageSize0 = 70.dp,
-  imageSize = 150.dp
+  heightImage=100.dp,
+  imageSize = 150.dp,
+  widthImage=200.dp
+
 )
 
 val CompactMediumDimens = Dimens(
@@ -69,7 +78,9 @@ val CompactMediumDimens = Dimens(
   logoSize1 = 55.dp,
   logoSize2 = 65.dp,
   imageSize0 = 85.dp,
-  imageSize = 155.dp
+    heightImage=120.dp,
+  imageSize = 155.dp,
+  widthImage=210.dp
 )
 
 val MediumDimens = Dimens(
@@ -82,12 +93,13 @@ val MediumDimens = Dimens(
   medium3 = 40.dp,
   large = 100.dp,
   buttonHeight = 40.dp,
-
   logoSize = 55.dp,
   logoSize1 = 60.dp,
   logoSize2 = 70.dp,
   imageSize0 = 120.dp,
-  imageSize = 200.dp
+    heightImage=150.dp,
+  imageSize = 200.dp,
+    widthImage=250.dp
 )
 
 val LargeDimens = Dimens(
@@ -102,9 +114,10 @@ val LargeDimens = Dimens(
   logoSize = 70.dp,
   logoSize1 = 80.dp,
   logoSize2 = 90.dp,
-
   imageSize0 = 160.dp,
-  imageSize = 350.dp
+    heightImage=200.dp,
+  imageSize = 350.dp,
+    widthImage=400.dp
 )
 
 val ExpandedDimens = Dimens(
@@ -120,6 +133,8 @@ val ExpandedDimens = Dimens(
   logoSize1 = 80.dp,
   logoSize2 = 90.dp,
   imageSize0 = 140.dp,
-  imageSize = 350.dp
+    heightImage=180.dp,
+  imageSize = 350.dp,
+    widthImage=400.dp
 )
 

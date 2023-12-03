@@ -1,5 +1,4 @@
 package RecipeRover.ui.screen.Home.component
-
 import RecipeRover.data.local.Recipe
 import RecipeRover.ui.RecipeViewModel
 import androidx.compose.foundation.Image
@@ -15,9 +14,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,12 +28,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.fahad.RecipeRover.R
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.ui.text.font.FontStyle.Companion.Italic
+import com.fahad.RecipeRover.ui.theme.dimens
 
 @Composable
 fun CardsSection(
@@ -49,9 +48,10 @@ fun CardsSection(
      text = recipeViewModel.getGreetingText(),
       modifier = Modifier
         .fillMaxWidth()
-        .padding(16.dp),
-      fontSize = 20.sp,
+        .padding(dimens.small3),
+      fontSize = MaterialTheme.typography.titleMedium.fontSize,
       fontWeight = FontWeight.Bold,
+      fontStyle = Italic,
 
       color = Color.White
     )
@@ -71,7 +71,7 @@ fun CardItem(
 ) {
 
   Box(
-    modifier = Modifier .padding(start = 8.dp, end = 6.dp).clickable(onClick = {
+    modifier = Modifier .padding(start = dimens.small2, end = dimens.small1).clickable(onClick = {
       navController.navigate("itemDetails/${recipe.title}")
 
     }
@@ -80,8 +80,8 @@ fun CardItem(
       .background(
         color = colorResource(id = R.color.black).copy(alpha = 0.7f)
       )
-      .width(200.dp)
-      .height(100.dp),
+      .width(dimens.widthImage)
+      .height(dimens.heightImage),
     contentAlignment = Alignment.BottomCenter
 
   ) {
@@ -95,7 +95,7 @@ fun CardItem(
     )
 
     Box(
-      modifier = Modifier.padding(8.dp)
+      modifier = Modifier.padding(dimens.small1)
 
 
         .background(
@@ -118,8 +118,7 @@ fun CardItem(
       Text(
         text = recipe.title,
         color = Color.White,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Bold,
+        fontSize = MaterialTheme.typography.titleMedium.fontSize,
         textAlign = TextAlign.Center,
 
         )
