@@ -1,4 +1,4 @@
-package RecipeRover.ui.screen
+package RecipeRover.ui.screen.Home
 
 import RecipeRover.data.local.Recipe
 import androidx.compose.foundation.Image
@@ -36,10 +36,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-
 import RecipeRover.data.local.entities.FavoriteItem
 import RecipeRover.ui.RecipeViewModel
-
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -50,10 +49,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.ui.text.style.TextOverflow
-
 import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
-
-
+import com.fahad.RecipeRover.ui.theme.dimens
 
 @Composable
 fun ItemDetailsScreen(
@@ -63,23 +60,17 @@ fun ItemDetailsScreen(
   recipeViewModel: RecipeViewModel
 ) {
 
-
-
   val relatedItems = recipeViewModel.getRelatedRecipes(item.foodType)
-
 
   val isBookInFavorites by favoriteViewModel.isBookInFavorites(item.title).collectAsState(false)
 
   Box(
-    modifier = Modifier
-      .fillMaxSize()
-      .background(MaterialTheme.colorScheme.background)
+    modifier = Modifier.fillMaxSize()
+
   ) {
 
-
-
     LazyColumn(
-         state = rememberLazyListState(),
+      state = rememberLazyListState(),
 
       modifier = Modifier
         .fillMaxSize()
@@ -113,20 +104,20 @@ fun ItemDetailsScreen(
             modifier = Modifier
               .align(Alignment.TopStart)
               .padding(16.dp)
-              .background(MaterialTheme.colorScheme.surface, CircleShape)
+              .background(MaterialTheme.colorScheme.onBackground, CircleShape)
+              .border(2.dp, MaterialTheme.colorScheme.background, CircleShape)
           ) {
             Icon(
               Icons.Default.ArrowBack,
               contentDescription = "Back",
               modifier = Modifier.size(32.dp),
-              tint = Color.White
+              tint = MaterialTheme.colorScheme.background
             )
           }
         }
       }
 
       item {
-
 
         // Recipe details
         Column(
@@ -152,33 +143,30 @@ fun ItemDetailsScreen(
                 } else {
                   favoriteViewModel.addToFavorite(item)
                 }
-              },
-              modifier = Modifier
+              }, modifier = Modifier
 
                 .padding(16.dp)
-                .background(MaterialTheme.colorScheme.primary, CircleShape)
+                .background(
+                  Color(0xFFE0E0E0), CircleShape
+                )
                 .size(50.dp)
             ) {
               Icon(
                 Icons.Default.Favorite,
                 contentDescription = "Favorite",
                 modifier = Modifier.size(32.dp),
-                tint = if (isBookInFavorites) Color.Red else Color.White
+                tint = if (isBookInFavorites) Color.Red else Color.Black
               )
             }
             Text(
               text = item.title,
-              fontSize = 30.sp,
+              fontSize = MaterialTheme.typography.headlineMedium.fontSize,
               fontWeight = FontWeight.Bold,
               textAlign = TextAlign.Center,
               color = MaterialTheme.colorScheme.onSurface,
-              modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth()
             )
+
           }
-
-
 
           // Recipe chef and details
           Row(
@@ -263,18 +251,18 @@ fun ItemDetailsScreen(
       }
 
       // Related items section
-        if (relatedItems.isNotEmpty()) {
+      if (relatedItems.isNotEmpty()) {
         item {
           Text(
-            text = "Related Items:",
+            text = "you may also like",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.padding(top = dimens.small2)
           )
 
           LazyRow(
-            contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)
+            contentPadding = PaddingValues(start = 10.dp, top = 8.dp, end = 16.dp, bottom = 10.dp)
           ) {
             items(relatedItems) { relatedItem ->
               RelatedItemCard(relatedItem = relatedItem, navController = navController)
@@ -291,7 +279,7 @@ fun ItemDetailsScreen(
 fun RelatedItemCard(relatedItem: Recipe, navController: NavController) {
   Box(
     modifier = Modifier
-      .width(150.dp)
+      .width(dimens.imageSize)
       .padding(end = 8.dp)
   ) {
     Card(
@@ -303,29 +291,28 @@ fun RelatedItemCard(relatedItem: Recipe, navController: NavController) {
           navController.navigate("itemDetails/${relatedItem.title}")
         },
 
-    ) {
+      ) {
       Column(
         modifier = Modifier
           .fillMaxSize()
-          .padding(8.dp)
+          .padding(dimens.small2),
       ) {
         Image(
           painter = painterResource(id = relatedItem.imageResId),
           contentDescription = null,
           modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp)
+            .height(dimens.heightImage)
             .clip(
               RoundedCornerShape(16.dp)
             ), // Clip to CircleShape for a circular image
-            contentScale = ContentScale.Crop
+          contentScale = ContentScale.Crop
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
           text = relatedItem.title,
           fontSize = MaterialTheme.typography.bodyLarge.fontSize,
-
-          maxLines = 2,
+          maxLines = 1,
           overflow = TextOverflow.Ellipsis
         )
       }

@@ -17,7 +17,7 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 
 
 import RecipeRover.ui.screen.Home.Home
-import RecipeRover.ui.screen.ItemDetailsScreen
+import RecipeRover.ui.screen.Home.ItemDetailsScreen
 
 import com.fahad.RecipeRover.ui.screen.UserDataViewModel
 import com.fahad.RecipeRover.ui.screen.auth.profile.EditProfileScreen
