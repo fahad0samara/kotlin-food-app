@@ -1,2 +1,1 @@
-# kotlin-fierbase-food.app
 
