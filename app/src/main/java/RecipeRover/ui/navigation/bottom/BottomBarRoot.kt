@@ -36,13 +36,11 @@ import com.fahad.RecipeRover.ui.navigation.bottom.BottomBar
 fun BottomBarRoot(navController: NavHostController = rememberNavController()
 
 ) {
-  val viewModel: CartViewModel = hiltViewModel()
   val favoriteViewModel: FavoriteViewModel = hiltViewModel()
 
 
   Scaffold(
     bottomBar = { BottomBarItem(navController = navController,
-      viewModel= viewModel,
       favoriteViewModel=favoriteViewModel
 
 
@@ -62,13 +60,12 @@ fun BottomBarRoot(navController: NavHostController = rememberNavController()
 @Composable
 fun BottomBarItem(
   navController: NavHostController,
-  viewModel: CartViewModel,
   favoriteViewModel: FavoriteViewModel
 ) {
   val screens = listOf(
     BottomBar.Home,
     BottomBar.Favorite,
-    BottomBar.Cart,
+
     BottomBar.Profile,
   )
 
@@ -78,8 +75,8 @@ fun BottomBarItem(
   val favoriteItems by favoriteViewModel.favorite.collectAsState(emptyList())
   val favoriteItemCount = favoriteItems.size
 
-  val cartItems by viewModel.cart.collectAsState(emptyList())
-  val cartItemCount = cartItems.size
+
+
 
   val bottomBarDestination = screens.any { it.route == currentDestination?.route }
 
@@ -97,11 +94,11 @@ fun BottomBarItem(
                 contentDescription = "Navigation Icon",
                 modifier = Modifier.size(24.dp)
               )
-              if ((screen == BottomBar.Cart && cartItemCount > 0) ||
+              if
                 (screen == BottomBar.Favorite && favoriteItemCount > 0)
-              ) {
+               {
                 Badge(
-                  count = if (screen == BottomBar.Cart) cartItemCount else favoriteItemCount,
+                  count =  favoriteItemCount,
                   modifier = Modifier.align(
                     Alignment.CenterVertically
                   )

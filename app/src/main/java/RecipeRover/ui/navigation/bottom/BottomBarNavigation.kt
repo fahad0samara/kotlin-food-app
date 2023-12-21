@@ -21,7 +21,7 @@ import com.fahad.RecipeRover.ui.screen.UserDataViewModel
 import com.fahad.RecipeRover.ui.screen.auth.profile.EditProfileScreen
 import com.fahad.RecipeRover.ui.screen.auth.profile.ProfileScreen
 
-import RecipeRover.ui.screen.cart.CartViewModel
+
 import android.annotation.SuppressLint
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
@@ -35,7 +35,7 @@ fun BottomBarNavigation(
   navController: NavHostController,
 ) {
   val userDataViewModel: UserDataViewModel = hiltViewModel()
-  val viewModel: CartViewModel = hiltViewModel()
+
   val favoriteViewModel: FavoriteViewModel = hiltViewModel()
   val recipeViewModel: RecipeViewModel = hiltViewModel()
   LaunchedEffect(userDataViewModel.user) {

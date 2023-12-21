@@ -20,11 +20,7 @@ sealed class BottomBar(
 
 
 
-  data object Cart : BottomBar(
-    route = "CART",
-    title = "CART",
-    icon = Icons.Default.ShoppingCart
-  )
+
   data object Favorite : BottomBar(
     route = "FAVORITE",
     title = "FAVORITE",
