@@ -61,8 +61,7 @@ class UserDataViewModel @Inject constructor(private val authRepository: AuthRepo
         _user.value = response.data
         // Check if the user is already verified
         _isEmailVerified.value = response.data.isEmailVerified
-        Log.d("TAG", "getUserData: ${_user.value?.displayName}")
-        Log.d("TAG", "getUserData: ${response.data.displayName}")
+
       }
     }
 

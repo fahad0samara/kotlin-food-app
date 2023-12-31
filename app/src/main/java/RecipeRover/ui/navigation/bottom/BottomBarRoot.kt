@@ -29,6 +29,10 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import RecipeRover.ui.screen.cart.CartViewModel
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import com.fahad.RecipeRover.ui.navigation.bottom.BottomBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -65,7 +69,6 @@ fun BottomBarItem(
   val screens = listOf(
     BottomBar.Home,
     BottomBar.Favorite,
-
     BottomBar.Profile,
   )
 
@@ -75,50 +78,72 @@ fun BottomBarItem(
   val favoriteItems by favoriteViewModel.favorite.collectAsState(emptyList())
   val favoriteItemCount = favoriteItems.size
 
-
-
-
   val bottomBarDestination = screens.any { it.route == currentDestination?.route }
 
   if (bottomBarDestination) {
-    NavigationBar {
-      screens.forEach { screen ->
-        NavigationBarItem(
-          icon = {
-            Row(
-              verticalAlignment = Alignment.CenterVertically,
-              horizontalArrangement = Arrangement.Center
-            ) {
-              Icon(
-                imageVector = screen.icon,
-                contentDescription = "Navigation Icon",
-                modifier = Modifier.size(24.dp)
-              )
-              if
-                (screen == BottomBar.Favorite && favoriteItemCount > 0)
-               {
-                Badge(
-                  count =  favoriteItemCount,
-                  modifier = Modifier.align(
-                    Alignment.CenterVertically
-                  )
+    NavigationBar(
+        modifier = Modifier.systemBarsPadding()
+          .padding(10.dp).clip(RoundedCornerShape(30.dp),
+        ),
+      tonalElevation = 20.dp,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+
+
+
+
+
+
+    ) {
+
+        screens.forEach { screen ->
+          NavigationBarItem(
+            icon = {
+              Row(
+
+              ) {
+                Icon(
+                  imageVector = screen.icon,
+                  contentDescription = "Navigation Icon",
+                  modifier = Modifier.size(24.dp)
                 )
+                if (screen == BottomBar.Favorite && favoriteItemCount > 0) {
+                  Badge(
+                    count = favoriteItemCount,
+                    modifier = Modifier.align(
+                      Alignment.CenterVertically
+                    )
+                  )
+                }
+              }
+            },
+            label = {
+              Text(
+                text = screen.title,
+                fontWeight = if (currentDestination?.hierarchy?.any { it.route == screen.route } == true) FontWeight.Bold else FontWeight.Normal
+              )
+            },
+            colors = NavigationBarItemDefaults.colors(
+              selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurface,
+
+            ),
+
+            selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+            onClick = {
+              navController.navigate(screen.route) {
+                popUpTo(navController.graph.findStartDestination().id)
+                launchSingleTop = true
               }
             }
-          },
-          label = { Text(text = screen.title) },
-          selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-          onClick = {
-            navController.navigate(screen.route) {
-              popUpTo(navController.graph.findStartDestination().id)
-              launchSingleTop = true
-            }
-          }
-        )
-      }
+          )
+        }
+
     }
   }
 }
+
+
 
 @Composable
 fun Badge(count: Int, modifier: Modifier = Modifier) {
