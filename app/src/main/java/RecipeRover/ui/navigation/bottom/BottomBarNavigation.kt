@@ -17,9 +17,9 @@ import com.fahad.RecipeRover.ui.screen.favorite.FavoriteViewModel
 import RecipeRover.ui.screen.Home.Home
 import RecipeRover.ui.screen.Home.details.ItemDetailsScreen
 
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
-import com.fahad.RecipeRover.ui.screen.auth.profile.EditProfileScreen
-import com.fahad.RecipeRover.ui.screen.auth.profile.ProfileScreen
+import RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.auth.profile.EditProfileScreen
+import RecipeRover.ui.screen.auth.profile.ProfileScreen
 
 
 import android.annotation.SuppressLint

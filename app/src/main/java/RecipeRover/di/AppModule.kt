@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.di
+package RecipeRover.di
 
 import android.content.Context
 import androidx.room.Room
@@ -8,7 +8,7 @@ import com.fahad.RecipeRover.data.local.dao.ItemDao
 import com.fahad.RecipeRover.data.local.database.AppDatabase
 import com.fahad.RecipeRover.data.repository.AuthRepositoryImpl
 
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

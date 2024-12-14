@@ -25,7 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 import RecipeRover.ui.theme.dimens
 import java.time.LocalTime
 

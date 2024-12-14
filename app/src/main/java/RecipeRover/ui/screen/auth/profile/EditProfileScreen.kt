@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.screen.auth.profile
+package RecipeRover.ui.screen.auth.profile
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -44,7 +44,7 @@ import androidx.navigation.NavController
 import RecipeRover.util.Button.LoadingButton
 import RecipeRover.util.snackBar.SnackbarWrapperEdit
 import com.fahad.RecipeRover.util.image.AsyncImageProfile
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 
 
 @Composable

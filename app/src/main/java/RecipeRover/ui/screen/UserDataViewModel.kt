@@ -1,8 +1,7 @@
-package com.fahad.RecipeRover.ui.screen
+package RecipeRover.ui.screen
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

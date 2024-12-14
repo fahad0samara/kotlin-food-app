@@ -51,7 +51,7 @@ import com.fahad.RecipeRover.R
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.derivedStateOf
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 import RecipeRover.ui.theme.dimens
 
 @SuppressLint("UnrememberedMutableState")

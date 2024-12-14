@@ -9,7 +9,7 @@ import com.fahad.RecipeRover.domain.model.Response
 import com.fahad.RecipeRover.domain.model.User
 import com.fahad.RecipeRover.domain.repository.AuthRepository
 
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 
 
 import dagger.hilt.android.lifecycle.HiltViewModel

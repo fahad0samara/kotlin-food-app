@@ -1,4 +1,4 @@
-package com.fahad.RecipeRover.ui.screen.auth.profile
+package RecipeRover.ui.screen.auth.profile
 
 import android.content.Intent
 import android.util.Log
@@ -51,7 +51,7 @@ import com.fahad.RecipeRover.util.snackBar.SnackbarWrapperProfile
 
 import com.fahad.RecipeRover.util.image.AsyncImageProfile
 
-import com.fahad.RecipeRover.ui.screen.UserDataViewModel
+import RecipeRover.ui.screen.UserDataViewModel
 
 @Composable
 fun ProfileScreen(
